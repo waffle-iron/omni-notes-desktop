@@ -1,41 +1,23 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Omni Notes</title>
-  </head>
-  <body>
-    <div id="holder">
-  Drag your file here
-</div>
+<html ng-app="app">
 
-<input  id="file" type="file"/>
+<head>
+  <meta charset="UTF-8">
+  <title>Omni Notes</title>
+  <!-- <link rel="stylesheet" href="./bower_components/angular-material/angular-material.css" /> -->
+</head>
 
-<script>
+<body>
 
-  var holder = document.getElementById('holder');
-  holder.ondragover = function () {
-    return false;
-  };
-  holder.ondragleave = holder.ondragend = function () {
-    return false;
-  };
-  holder.ondrop = function (e) {
-    e.preventDefault();
-    var file = e.dataTransfer.files[0];
-    console.log('File you dragged here is', file.path);
-    return false;
-  };
+  BAU
 
+  <script src="./bower_components/angular/angular.js"></script>
+  <script src="./bower_components/angular-route/angular-route.js"></script>
+  <script src="./bower_components/angular-aria/angular-aria.js"></script>
+  <script src="./bower_components/angular-animate/angular-animate.js"></script>
+  <script src="./bower_components/angular-material/angular-material.js"></script>
+  <script src="./app/app.js"></script>
 
-    var file = document.getElementById('file');
-file.oninput = function (e) {
-  e.preventDefault();
-  var file = e.dataTransfer.files[0];
-  console.log('file scelto ', file.path);
-  return false;
-};
+</body>
 
-</script>
-  </body>
 </html>
