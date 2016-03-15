@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    var _templateBase = './scripts';
+    var _templateBase = 'app/scripts';
 
     angular.module('app', [
         'ngRoute',
@@ -10,8 +10,7 @@
     ])
     .config(['$routeProvider', function ($routeProvider) {
             $routeProvider.when('/', {
-                templateUrl: _templateBase + '/customer/customer.html' ,
-                controller: 'customerController',
+                templateUrl: _templateBase + '/list/list.html',
                 controllerAs: '_ctrl'
             });
             $routeProvider.otherwise({ redirectTo: '/' });
