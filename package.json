@@ -1,10 +1,17 @@
 {
   "name": "omni-notes-desktop",
   "version": "0.0.1",
-  "description": "Omni Notes' dekstop application",
+  "description": "Omni Notes desktop application",
   "main": "main.js",
   "scripts": {
     "start": "electron main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/federicoiosue/omni-notes-desktop.git"
+  },
+  "bugs": {
+    "url": "https://github.com/federicoiosue/omni-notes-desktop/issues"
   },
   "keywords": [
     "Electron",
