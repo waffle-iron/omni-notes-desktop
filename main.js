@@ -16,7 +16,7 @@ function createWindow() {
     width: 800,
     height: 600,
     icon: __dirname + '/app/assets/images/logo.png',
-    // frame: false
+    frame: false
   });
 
   // and load the index.html of the app.

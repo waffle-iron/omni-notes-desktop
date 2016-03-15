@@ -8,18 +8,8 @@
 </head>
 
 <body>
-  <md-toolbar class="md-theme-indigo">
-    <div class="md-toolbar-tools">
-      <h1><span>Omni Notes</span></h1>
-      <span flex></span>
-      <md-button class="md-icon-button" aria-label="More">
-        <md-icon md-svg-icon="app/assets/images/more_vert.svg"></md-icon>
-      </md-button>
-    </div>
-  </md-toolbar>
-
+  <div ng-include="'app/scripts/drawer/drawer.html'"></div>
   <ng-view></ng-view>
-
   <script src="./bower_components/angular/angular.js"></script>
   <script src="./bower_components/angular-route/angular-route.js"></script>
   <script src="./bower_components/angular-aria/angular-aria.js"></script>
@@ -27,7 +17,7 @@
   <script src="./bower_components/angular-material/angular-material.js"></script>
   <script src="./app/app.js"></script>
   <script src="./app/scripts/list/listController.js"></script>
-
+  <script src="./app/scripts/drawer/drawerController.js"></script>
 </body>
 
 </html>
