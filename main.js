@@ -1,9 +1,7 @@
 'use strict';
 
 const electron = require('electron');
-// Module to control application life.
 const app = electron.app;
-// Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -15,8 +13,8 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    icon: __dirname + '/app/assets/images/logo.png',
-    frame: false
+    //frame: false,
+    icon: __dirname + '/app/assets/images/logo.png'
   });
 
   // and load the index.html of the app.

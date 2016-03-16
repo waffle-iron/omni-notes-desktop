@@ -1,12 +1,7 @@
 <div ng-controller="listController" layout="column" style="height:500px;" ng-cloak>
   <section layout="row" flex>
-    <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="true" md-disable-backdrop md-whiteframe="4">
-      <md-content layout-padding>
-      </md-content>
-    </md-sidenav>
+    <div ng-include="'app/scripts/drawer/drawer.html'"></div>
     <md-content flex layout-padding>
-
     </md-content>
-
   </section>
 </div>
