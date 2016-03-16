@@ -9,7 +9,11 @@
 
 <body>
   <div ng-include="'app/scripts/toolbar/toolbar.html'"></div>
-  <ng-view></ng-view>
+  <ng-view id="rootView" ng-cloak></ng-view>
+
+  <script>
+    window.$ = window.jQuery = require('./bower_components/jquery/dist/jquery.js');
+  </script>
   <script src="./bower_components/angular/angular.js"></script>
   <script src="./bower_components/angular-route/angular-route.js"></script>
   <script src="./bower_components/angular-aria/angular-aria.js"></script>
@@ -18,6 +22,10 @@
   <script src="./app/app.js"></script>
   <script src="./app/scripts/list/listController.js"></script>
   <script src="./app/scripts/toolbar/toolbarController.js"></script>
+  <script src="./app/scripts/drawer/drawerController.js"></script>
+  <script src="./app/scripts/settings/settingsController.js"></script>
+  <script src="./app/scripts/settings/uploadDirective.js"></script>
+
 </body>
 
 </html>
