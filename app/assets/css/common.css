@@ -1,0 +1,6 @@
+.toolbar {
+  -webkit-app-region: drag;
+}
+.toolbar md-menu {
+  -webkit-app-region: no-drag;
+}
