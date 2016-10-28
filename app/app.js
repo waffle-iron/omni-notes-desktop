@@ -8,7 +8,8 @@ var app;
     app = angular.module('app', [
         'ngRoute',
         'ngMaterial',
-        'ngAnimate'
+        'ngAnimate',
+        'ngMdIcons'
     ])
     .config(['$routeProvider', function ($routeProvider) {
             $routeProvider

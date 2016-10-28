@@ -1,6 +1,12 @@
 .toolbar {
-  -webkit-app-region: drag;
+    -webkit-app-region: drag;
 }
+
 .toolbar md-menu {
-  -webkit-app-region: no-drag;
+    -webkit-app-region: no-drag;
+}
+
+.menu-item ng-md-icon {
+    margin: auto;
+    margin-right: 15px;
 }

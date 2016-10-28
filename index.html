@@ -2,30 +2,33 @@
 <html ng-app="app">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Omni Notes</title>
-  <link rel="stylesheet" href="./app/assets/css/common.css" />
-  <link rel="stylesheet" href="./bower_components/angular-material/angular-material.css" />
+    <meta charset="UTF-8">
+    <title>Omni Notes</title>
+    <link rel="stylesheet" href="./app/assets/css/common.css" />
+    <link rel="stylesheet" href="./bower_components/angular-material/angular-material.css" />
 </head>
 
 <body>
-  <div ng-include="'app/scripts/toolbar/toolbar.html'"></div>
-  <ng-view id="rootView" ng-cloak></ng-view>
+    <div ng-include="'app/scripts/toolbar/toolbar.html'"></div>
+    <ng-view id="rootView" ng-cloak></ng-view>
 
-  <script>
-    window.$ = window.jQuery = require('./bower_components/jquery/dist/jquery.js');
-  </script>
-  <script src="./bower_components/angular/angular.js"></script>
-  <script src="./bower_components/angular-route/angular-route.js"></script>
-  <script src="./bower_components/angular-aria/angular-aria.js"></script>
-  <script src="./bower_components/angular-animate/angular-animate.js"></script>
-  <script src="./bower_components/angular-material/angular-material.js"></script>
-  <script src="./app/app.js"></script>
-  <script src="./app/scripts/list/listController.js"></script>
-  <script src="./app/scripts/toolbar/toolbarController.js"></script>
-  <script src="./app/scripts/drawer/drawerController.js"></script>
-  <script src="./app/scripts/settings/settingsController.js"></script>
-  <script src="./app/scripts/settings/uploadDirective.js"></script>
+    <script>
+        window.$ = window.jQuery = require('./bower_components/jquery/dist/jquery.js');
+    </script>
+
+    <script src="./bower_components/angular/angular.js"></script>
+    <script src="./bower_components/angular-route/angular-route.js"></script>
+    <script src="./bower_components/angular-aria/angular-aria.js"></script>
+    <script src="./bower_components/angular-animate/angular-animate.js"></script>
+    <script src="./bower_components/angular-material/angular-material.js"></script>
+    <script src="./bower_components/angular-material-icons/angular-material-icons.min.js"></script>
+
+    <script src="./app/app.js"></script>
+    <script src="./app/scripts/list/listController.js"></script>
+    <script src="./app/scripts/toolbar/toolbarController.js"></script>
+    <script src="./app/scripts/drawer/drawerController.js"></script>
+    <script src="./app/scripts/settings/settingsController.js"></script>
+    <script src="./app/scripts/settings/uploadDirective.js"></script>
 
 </body>
 
