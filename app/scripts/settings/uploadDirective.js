@@ -32,6 +32,14 @@ function materialFileInputLink(scope, element, attrs) {
     var files = e.target.files;
     if (files[0]) {
       scope.fileName = files[0].name;
+
+      var reader = new FileReader();
+      reader.currentScope = scope
+      reader.onload = function(e) {
+        this.currentScope.$root.notes = JSON.parse(reader.result);
+      }
+      reader.readAsText(files[0], 'utf-8');
+
     } else {
       scope.fileName = null;
     }
