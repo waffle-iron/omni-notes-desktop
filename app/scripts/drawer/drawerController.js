@@ -1,4 +1,4 @@
-angular.module('app').controller('drawerController', ["$scope", '$q', '$log', '$mdDialog', function($scope, $q, $log, $mdDialog) {
+angular.module('ONApp').controller('drawerController', ["$scope", '$q', '$log', '$mdDialog', function($scope, $q, $log, $mdDialog) {
   $log.debug('drawer loaded');
 
   // Menu items

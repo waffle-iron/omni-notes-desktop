@@ -1,11 +1,11 @@
-var app;
+var ONApp;
 
 (function () {
     'use strict';
 
     var _templateBase = 'app/scripts';
 
-    app = angular.module('app', [
+    ONApp = angular.module('ONApp', [
         'ngRoute',
         'ngMaterial',
         'ngAnimate',

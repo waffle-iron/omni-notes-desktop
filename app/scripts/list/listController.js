@@ -1,4 +1,4 @@
-angular.module('app').controller('listController', ['$rootScope', '$scope', '$q', '$log', function($rootScope, $scope, $q, $log) {
+angular.module('ONApp').controller('listController', ['$rootScope', '$scope', '$q', '$log', 'notesService', function($rootScope, $scope, $q, $log, notesService) {
   $log.debug('list loaded');
 
   $rootScope.notes = {};

@@ -1,4 +1,5 @@
 app.directive('materialFileInput', materialFileInput);
+ONApp.directive('materialFileInput', ['notesService', function materialFileInput(notesService) {
 
 function materialFileInput() {
   var directive = {
