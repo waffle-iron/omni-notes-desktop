@@ -1,4 +1,4 @@
-angular.module('ONApp').controller('listController', ['$rootScope', '$scope', '$q', '$log', 'NOTES_EVENT', 'notesService', 'storageService', function($rootScope, $scope, $q, $log, NOTES_EVENT, notesService, storageService) {
+angular.module('ONApp').controller('listController', ['$rootScope', '$scope', '$q', '$log', 'NOTES_EVENT', 'notesService', 'storageService', '$mdDialog', function($rootScope, $scope, $q, $log, NOTES_EVENT, notesService, storageService, $mdDialog) {
 
     $scope.notesBackupFolder;
 
@@ -25,6 +25,14 @@ angular.module('ONApp').controller('listController', ['$rootScope', '$scope', '$
         return note.attachmentsList && note.attachmentsList.length ?
             note.attachmentsList[0].uriPath.substring(note.attachmentsList[0].uriPath.lastIndexOf('files'), note.attachmentsList[0].uriPath.length) :
             '';
+    }
+
+    $scope.newNote = function() {
+      $mdDialog.show({
+        templateUrl: 'app/scripts/detail/detail.html',
+        parent: angular.element(document.body),
+        clickOutsideToClose: true
+      })
     }
 
     $scope.notes = loadNotes();
