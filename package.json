@@ -23,5 +23,8 @@
   "license": "GPLv3",
   "devDependencies": {
     "electron-prebuilt": "^0.37.2"
+  },
+  "dependencies": {
+    "electron-json-storage": "^2.0.3"
   }
 }

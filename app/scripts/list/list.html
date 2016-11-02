@@ -1,7 +1,10 @@
 <div ng-controller="listController" layout="column" style="height:500px;" ng-cloak>
-  <section layout="row" flex>
-    <div ng-include="'app/scripts/drawer/drawer.html'" layout="vertical" flex/>
-    <md-content flex layout-padding>
-    </md-content>
-  </section>
+    <section layout="row" flex>
+        <div ng-include="'app/scripts/drawer/drawer.html'" layout="vertical" flex/>
+        <md-content flex>
+            <md-list-item class="menu-item md-2-line" ng-repeat="note in notes" role="link" md-ink-ripple>
+                <div ng-include="'app/scripts/list/note.html'"/>
+            </md-list-item>
+        </md-content>
+    </section>
 </div>

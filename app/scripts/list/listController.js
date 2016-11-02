@@ -1,9 +1,17 @@
-angular.module('ONApp').controller('listController', ['$rootScope', '$scope', '$q', '$log', 'notesService', function($rootScope, $scope, $q, $log, notesService) {
-  $log.debug('list loaded');
+angular.module('ONApp').controller('listController', ['$rootScope', '$scope', '$q', '$log', 'NOTES_EVENT', 'notesService', 'storageService', function($rootScope, $scope, $q, $log, NOTES_EVENT, notesService, storageService) {
 
-  $rootScope.notes = {};
+    $log.debug('list loaded');
 
-  $scope.$watch('notes', function(newVal, oldVal){
-        console.log('changed');
+    $rootScope.$on(NOTES_EVENT.LOADED, function(notes) {
+        $scope.notes = notesService.getNotes();
+        $scope.$apply();
     });
+
+    loadNotes = function() {
+        storageService.get('notes_backup_folder', notesService.loadNotes);
+        return [];
+    }
+
+    $scope.notes = loadNotes();
+
 }]);

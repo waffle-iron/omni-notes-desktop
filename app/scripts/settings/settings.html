@@ -1,8 +1,10 @@
 <div ng-controller='settingsController'>
 
-  <material-file-input/>
+    <h2>SETTINGS</h2>
 
-  <md-button ng-click="closeSettings()" style="margin-right:20px;">
-    Save
-  </md-button>
+    <h3>Omni Notes backup folder</h3>
+    <material-file-input/>
+    <md-divider />
+
+    <md-button class="md-raised md-primary" ng-click="closeSettings()" style="margin-right:20px;">Close</md-button>
 </div>
