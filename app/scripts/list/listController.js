@@ -8,7 +8,9 @@ angular.module('ONApp').controller('listController', ['$rootScope', '$scope', '$
     });
 
     loadNotes = function() {
-        storageService.get('notes_backup_folder', notesService.loadNotes);
+        storageService.get('notes_backup_folder').then(function(data) {
+            notesService.loadNotes(data);
+        });
         return [];
     }
 

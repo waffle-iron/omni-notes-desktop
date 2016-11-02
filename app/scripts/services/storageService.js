@@ -1,6 +1,7 @@
 angular.module("ONApp").service("storageService", ['$rootScope', function($rootScope) {
 
-    var storage = require('electron-json-storage');
+    const Promise = require('bluebird');
+    const storage = Promise.promisifyAll(require('electron-json-storage'));
 
     this.put = function(key, value) {
         storage.set(key, value, function(error) {
@@ -8,11 +9,8 @@ angular.module("ONApp").service("storageService", ['$rootScope', function($rootS
         });
     };
 
-    this.get = function(key, callback) {
-        storage.get(key, function(error, data) {
-            if (error) throw error;
-            callback(data);
-        });
+    this.get = function(key) {
+        return storage.getAsync(key);
     };
 
 }]);

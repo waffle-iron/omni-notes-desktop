@@ -3,8 +3,6 @@
 
 ## Environment
 
-```bower install jquery angular angular-route angular-material angular-material-icons underscore --save ```
-
-```npm install electron-json-storage```
+```npm install jquery angular angular-route angular-material angular-animate angular-aria angular-material-icons underscore bluebird electron-json-storage```
 
 #### License [GPL3](LICENSE.md)

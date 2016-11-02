@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Omni Notes</title>
     <link rel="stylesheet" href="./app/assets/css/common.css" />
-    <link rel="stylesheet" href="./bower_components/angular-material/angular-material.css" />
+    <link rel="stylesheet" href="./node_modules/angular-material/angular-material.css" />
 </head>
 
 <body>
@@ -13,15 +13,16 @@
     <ng-view id="rootView" ng-cloak></ng-view>
 
     <script>
-        window.$ = window.jQuery = require('./bower_components/jquery/dist/jquery.js');
+        window.$ = window.jQuery = require('./node_modules/jquery/dist/jquery.js');
     </script>
 
-    <script src="./bower_components/angular/angular.js"></script>
-    <script src="./bower_components/angular-route/angular-route.js"></script>
-    <script src="./bower_components/angular-aria/angular-aria.js"></script>
-    <script src="./bower_components/angular-animate/angular-animate.js"></script>
-    <script src="./bower_components/angular-material/angular-material.js"></script>
-    <script src="./bower_components/angular-material-icons/angular-material-icons.min.js"></script>
+    <script src="./node_modules/angular/angular.js"></script>
+    <script src="./node_modules/angular-route/angular-route.js"></script>
+    <script src="./node_modules/angular-aria/angular-aria.js"></script>
+    <script src="./node_modules/angular-animate/angular-animate.js"></script>
+    <script src="./node_modules/angular-material/angular-material.js"></script>
+    <script src="./node_modules/angular-material-icons/angular-material-icons.min.js"></script>
+    <script src="./node_modules/bluebird/js/browser/bluebird.min.js"></script>
 
     <script src="./app/app.js"></script>
     <script src="./app/scripts/Constants.js"></script>
