@@ -3,20 +3,19 @@ angular.module("ONApp").service("notesService", ['$rootScope', 'NOTES_EVENT', 's
     var fs = require('fs');
     var notes = [];
 
-    this.loadNotes = function(backupFilePath) {
+    this.loadNotes = function(backupFolderPath) {
         notes = [];
-        var folder = backupFilePath.substr(0, backupFilePath.lastIndexOf("/"));
-        fs.readdir(folder, function(err, files) {
+        fs.readdir(backupFolderPath, function(err, files) {
             var filtered = files.filter(function(fileName) {
-                return new RegExp("[0-9]{13}").test(fileName);
+                return new RegExp("[0-9]{13}\\.json").test(fileName);
             });
             filtered.forEach(function(fileName) {
-                var filePath = folder + '/' + fileName;
+                var filePath = backupFolderPath + '/' + fileName;
                 console.log('Reading content of file: ' + filePath);
                 fs.readFile(filePath, function(err, data) {
                     notes.push(JSON.parse(data));
                     if (notes.length == filtered.length) {
-                        storageService.put('notes_backup_folder', backupFilePath);
+                        storageService.put('notes_backup_folder', backupFolderPath);
                         $rootScope.$emit(NOTES_EVENT.LOADED, notes);
                     }
                 });

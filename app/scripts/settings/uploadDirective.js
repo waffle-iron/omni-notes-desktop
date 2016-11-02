@@ -25,7 +25,8 @@ ONApp.directive('materialFileInput', ['notesService', function materialFileInput
                 var files = e.target.files;
                 if (files[0]) {
                     scope.fileName = files[0].name;
-                    notesService.loadNotes(files[0].path);
+                    var backupFolderPath = files[0].path.substr(0, files[0].path.lastIndexOf("/"));
+                    notesService.loadNotes(backupFolderPath);
                 } else {
                     scope.fileName = null;
                 }
