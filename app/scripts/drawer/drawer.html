@@ -1,7 +1,7 @@
 <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true">
     <md-content ng-controller='drawerController' flex>
         <!-- Menu -->
-        <md-list-item class="menu-item md-2-line" ng-repeat="item in menu" role="link" md-ink-ripple ng-click="this[item.method]()">
+        <md-list-item class="menu-item md-2-line" ng-repeat="item in menu" role="link" md-ink-ripple ng-click="this[item.method](item.params)">
             <ng-md-icon icon="{{item.icon}}" class="md-default-theme"/>
             <div class="md-list-item-text">
                 <span class="md-body-2">{{item.title}}</span>
@@ -9,7 +9,7 @@
         </md-list-item>
         <!-- Footer -->
         <md-divider />
-        <md-list-item class="menu-item md-2-line" ng-repeat="item in menuFooter" role="link" md-ink-ripple ng-click="this[item.method]()">
+        <md-list-item class="menu-item md-2-line" ng-repeat="item in menuFooter" role="link" md-ink-ripple ng-click="this[item.method](item.params)">
             <ng-md-icon icon="{{item.icon}}" />
             <div class="md-list-item-text">
                 <span class="md-body-2">{{item.title}}</span>

@@ -2,9 +2,8 @@ angular.module('ONApp').controller('listController', ['$rootScope', '$scope', '$
 
     $scope.notesBackupFolder;
 
-    $rootScope.$on(NOTES_EVENT.LOADED, function(notes) {
-        $scope.notes = notesService.getNotes();
-        $scope.$apply();
+    $rootScope.$on(NOTES_EVENT.LOADED, function(event, notes) {
+        $scope.notes = notes;
     });
 
     loadNotes = function() {
@@ -28,11 +27,11 @@ angular.module('ONApp').controller('listController', ['$rootScope', '$scope', '$
     }
 
     $scope.newNote = function() {
-      $mdDialog.show({
-        templateUrl: 'app/scripts/detail/detail.html',
-        parent: angular.element(document.body),
-        clickOutsideToClose: true
-      })
+        $mdDialog.show({
+            templateUrl: 'app/scripts/detail/detail.html',
+            parent: angular.element(document.body),
+            clickOutsideToClose: true
+        })
     }
 
     $scope.notes = loadNotes();

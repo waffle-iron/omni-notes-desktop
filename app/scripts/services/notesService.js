@@ -26,4 +26,9 @@ angular.module("ONApp").service("notesService", ['$rootScope', 'NOTES_EVENT', 's
     this.getNotes = function() {
         return notes;
     };
+
+    this.filterNotes = function(filterPredicate) {
+        var filteredNotes = _.filter(notes, filterPredicate);
+        $rootScope.$emit(NOTES_EVENT.LOADED, filteredNotes);
+    };
 }]);
