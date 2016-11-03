@@ -1,3 +1,3 @@
 ONApp.constant('NOTES_EVENT', {
-    LOADED : 'onevent:notes_loaded'
+    LOADED: 'onevent:notes_loaded'
 });

@@ -1,16 +1,16 @@
 <md-toolbar class="md-theme-indigo toolbar" ng-controller='toolbarController'>
-  <div class="md-toolbar-tools">
-    <h1><span>Omni Notes</span></h1>
-    <span flex></span>
-    <md-menu md-offset="0 -7">
-      <md-button class="md-icon-button" aria-label="More" ng-click="$mdOpenMenu($event)">
-        <md-icon md-svg-icon="app/assets/images/more_vert.svg"></md-icon>
-      </md-button>
-      <md-menu-content width="2">
-        <md-menu-item>
-          <md-button ng-click="exit()"> <span md-menu-align-target>Exit</span></md-button>
-        </md-menu-item>
-      </md-menu-content>
-    </md-menu>
-  </div>
+    <div class="md-toolbar-tools">
+        <h1><span>Omni Notes</span></h1>
+        <span flex></span>
+        <md-menu md-offset="0 -7">
+            <md-button class="md-icon-button" aria-label="More" ng-click="$mdOpenMenu($event)">
+                <ng-md-icon icon="more_vert" class="md-default-theme" />
+            </md-button>
+            <md-menu-content width="2">
+                <md-menu-item>
+                    <md-button ng-click="exit()"> <span md-menu-align-target>Exit</span></md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </div>
 </md-toolbar>

@@ -1,7 +1,7 @@
 angular.module('ONApp').controller('toolbarController', ["$scope", '$q', '$log', '$window', function($scope, $q, $log, $window) {
-  $log.debug('toolbar loaded');
+    $log.debug('toolbar loaded');
 
-  $scope.exit = function() {
-    $window.close();
-  }
+    $scope.exit = function() {
+        $window.close();
+    }
 }]);

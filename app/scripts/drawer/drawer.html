@@ -2,7 +2,7 @@
     <md-content ng-controller='drawerController' flex>
         <!-- Menu -->
         <md-list-item class="menu-item md-2-line" ng-repeat="item in menu" role="link" md-ink-ripple ng-click="this[item.method](item.params)">
-            <ng-md-icon icon="{{item.icon}}" class="md-default-theme"/>
+            <ng-md-icon icon="{{item.icon}}" class="md-default-theme" />
             <div class="md-list-item-text">
                 <span class="md-body-2">{{item.title}}</span>
             </div>
