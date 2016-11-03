@@ -44,6 +44,13 @@ angular.module("ONApp").service("notesService", ['$rootScope', 'NOTES_EVENT', 's
             updatedNote.creation = now;
             notes.push(updatedNote);
         }
-        $rootScope.$emit(NOTES_EVENT.LOADED, notes);
+        storageService.get('notes_backup_folder').then(function(notesBackupFolder) {
+            fs.writeFile(notesBackupFolder + '/' + updatedNote.creation + '.json', JSON.stringify(updatedNote), function(err) {
+                if (err) throw err;
+                $rootScope.$emit(NOTES_EVENT.LOADED, notes);
+            });
+        });
+
     };
+
 }]);
