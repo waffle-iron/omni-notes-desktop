@@ -31,4 +31,19 @@ angular.module("ONApp").service("notesService", ['$rootScope', 'NOTES_EVENT', 's
         var filteredNotes = _.filter(notes, filterPredicate);
         $rootScope.$emit(NOTES_EVENT.LOADED, filteredNotes);
     };
+
+    this.saveNote = function(updatedNote) {
+        var now = new Date().getTime();
+        updatedNote.lastModification = now;
+        if (updatedNote.creation) {
+            var i = _.findIndex(notes, function(note) {
+                return note.creation == updatedNote.creation;
+            })
+            notes[i] = updatedNote;
+        } else {
+            updatedNote.creation = now;
+            notes.push(updatedNote);
+        }
+        $rootScope.$emit(NOTES_EVENT.LOADED, notes);
+    };
 }]);

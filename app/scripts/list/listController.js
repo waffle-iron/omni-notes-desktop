@@ -26,11 +26,15 @@ angular.module('ONApp').controller('listController', ['$rootScope', '$scope', '$
             '';
     }
 
-    $scope.newNote = function() {
+    $scope.editNote = function(note) {
         $mdDialog.show({
             templateUrl: 'app/scripts/detail/detail.html',
             parent: angular.element(document.body),
-            clickOutsideToClose: true
+            clickOutsideToClose: true,
+            controller: 'detailController',
+            locals: {
+                note: note
+            }
         })
     }
 

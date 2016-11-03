@@ -2,7 +2,7 @@
     <section layout="row" flex>
         <div ng-include="'app/scripts/drawer/drawer.html'" layout="vertical" flex/>
         <md-content flex>
-            <md-list-item class="menu-item md-2-line" ng-repeat="note in notes" role="link" md-ink-ripple>
+            <md-list-item class="menu-item md-2-line" ng-repeat="note in notes" role="link" md-ink-ripple ng-click="editNote(note)">
                 <div ng-include="'app/scripts/list/note.html'" class="note-include" />
             </md-list-item>
             <div ng-include="'app/scripts/list/fab.html'" layout="vertical" flex/>

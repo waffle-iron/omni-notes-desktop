@@ -1,6 +1,15 @@
-<div ng-controller='detailController'>
+<div>
 
     <h2>New note</h2>
 
-    <md-button class="md-raised md-primary" style="margin-right:20px;">Save</md-button>
+    <md-input-container class="md-icon-float md-input-has-messages">
+        <input type="text" class="md-input" aria-label="{{InputView.formItem.config.placeholder}}" placeholder="Title" ng-model="note.title" value="{{note.title}}">
+    </md-input-container>
+
+    <md-input-container class="md-icon-float md-input-has-messages">
+        <textarea class="md-input" aria-label="{{InputView.formItem.config.placeholder}}" placeholder="Content" ng-model="note.content">{{note.content}}</textarea>
+    </md-input-container>
+
+    <md-button class="md-raised md-primary" style="margin-right:20px;" ng-click="saveNote()">Save</md-button>
+
 </div>
