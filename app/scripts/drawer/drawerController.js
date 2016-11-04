@@ -1,7 +1,5 @@
-angular.module('ONApp').controller('drawerController', ["$scope", '$q', '$log', '$mdDialog', 'notesService', function($scope, $q, $log, $mdDialog, notesService) {
-    $log.debug('drawer loaded');
+angular.module('ONApp').controller('drawerController', ['$rootScope', '$scope', '$q', '$log', '$mdDialog', 'notesService', 'CONSTANTS', function($rootScope, $scope, $q, $log, $mdDialog, notesService, CONSTANTS) {
 
-    // Menu items
     $scope.menu = [{
         method: 'filterNotes',
         params: function(note) {
@@ -45,8 +43,20 @@ angular.module('ONApp').controller('drawerController', ["$scope", '$q', '$log', 
         icon: 'settings'
     }];
 
+    // FIXME: Directly filter notes on application start (WIP)
+    // $scope.activeItem = $scope.menu[0];
+    //
+    // $rootScope.$on(CONSTANTS.NOTES_LOADED, function(event, notes) {
+    //     setTimeout(function() {
+    //         $scope.filterNotes($scope.menu[0].params);
+    //     });
+    // });
+
     $scope.filterNotes = function(filterPredicate) {
         notesService.filterNotes(filterPredicate);
+        $scope.activeItem = _.findWhere($scope.menu, {
+            params: filterPredicate
+        });
     };
 
     $scope.showSettings = function(ev) {

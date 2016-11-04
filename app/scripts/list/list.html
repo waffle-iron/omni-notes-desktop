@@ -1,11 +1,13 @@
-<div ng-controller="listController" layout="column" style="height:500px;" ng-cloak>
-    <section layout="row" flex>
-        <div ng-include="'app/scripts/drawer/drawer.html'" layout="vertical" flex/>
+<div ng-controller="listController">
+    <section layout="row">
+        <div flex ng-include="'app/scripts/drawer/drawer.html'" layout="vertical"/>
         <md-content flex>
-            <md-list-item class="menu-item md-2-line" ng-repeat="note in notes" role="link" md-ink-ripple ng-click="editNote(note)">
+            <md-list-item ng-repeat="note in notes track by note.creation" ng-click="editNote(note)">
                 <div ng-include="'app/scripts/list/note.html'" class="note-include" />
             </md-list-item>
-            <div ng-include="'app/scripts/list/fab.html'" layout="vertical" flex/>
+            <md-button class="md-warn md-fab md-fab-bottom-right" ng-click="editNote()">
+                <ng-md-icon icon="edit" class="md-default-theme" />
+            </md-button>
         </md-content>
     </section>
 </div>

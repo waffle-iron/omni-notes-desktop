@@ -1,4 +1,4 @@
-angular.module("ONApp").service("notesService", ['$rootScope', 'NOTES_EVENT', 'storageService', function($rootScope, NOTES_EVENT, storageService) {
+angular.module("ONApp").service("notesService", ['$rootScope', 'CONSTANTS', 'storageService', function($rootScope, CONSTANTS, storageService) {
 
     var fs = require('fs');
     var notes = [];
@@ -16,7 +16,7 @@ angular.module("ONApp").service("notesService", ['$rootScope', 'NOTES_EVENT', 's
                     notes.push(JSON.parse(data));
                     if (notes.length == filtered.length) {
                         storageService.put('notes_backup_folder', backupFolderPath);
-                        $rootScope.$emit(NOTES_EVENT.LOADED, notes);
+                        $rootScope.$emit(CONSTANTS.NOTES_LOADED, notes);
                     }
                 });
             });
@@ -29,7 +29,7 @@ angular.module("ONApp").service("notesService", ['$rootScope', 'NOTES_EVENT', 's
 
     this.filterNotes = function(filterPredicate) {
         var filteredNotes = _.filter(notes, filterPredicate);
-        $rootScope.$emit(NOTES_EVENT.LOADED, filteredNotes);
+        $rootScope.$emit(CONSTANTS.NOTES_FILTERED, filteredNotes);
     };
 
     this.saveNote = function(updatedNote) {
@@ -47,7 +47,7 @@ angular.module("ONApp").service("notesService", ['$rootScope', 'NOTES_EVENT', 's
         storageService.get('notes_backup_folder').then(function(notesBackupFolder) {
             fs.writeFile(notesBackupFolder + '/' + updatedNote.creation + '.json', JSON.stringify(updatedNote), function(err) {
                 if (err) throw err;
-                $rootScope.$emit(NOTES_EVENT.LOADED, notes);
+                $rootScope.$emit(CONSTANTS.NOTE_MODIFIED, notes);
             });
         });
 

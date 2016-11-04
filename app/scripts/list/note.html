@@ -1,12 +1,15 @@
-<div class="note md-list-item-text" layout="row">
-    <div style="float: left; width: 10px; background: {{note.category.color}};"></div>
-    <div flex style="float: left;">
-        <h3>{{note.title}}</h3>
-        <h4>{{note.content}}</h4>
-        <p>{{note.modification}}</p>
-    </div>
-    <div style="float: right;" ng-if="note.attachmentsList && note.attachmentsList.length">
-        <img ng-src="{{getNoteThumbnail(note)}}" alt="{{getNoteThumbnailShort(note)}}" />
-    </div>
-
-</div>
+<!-- <div class="note md-list-item-text" layout="row"> -->
+  <md-card >
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{note.title}}</span>
+            <span class="md-subhead">{{note.content}}</span>
+          </md-card-title-text>
+          <md-card-title-media ng-if="note.attachmentsList && note.attachmentsList.length">
+            <div class="md-media-sm card-media">
+              <img ng-src="{{getNoteThumbnail(note)}}" alt="{{getNoteThumbnailShort(note)}}" />
+            </div>
+          </md-card-title-media>
+        </md-card-title>
+      </md-card>
+<!-- </div> -->

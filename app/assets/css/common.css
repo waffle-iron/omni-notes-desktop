@@ -11,12 +11,14 @@
     margin-right: 15px;
 }
 
-.note-include {
-  width: 100%;
-  height: 100px;
+ng-md-icon {
+    fill: currentColor;
+    vertical-align: middle;
+    display: inline-block;
+    line-height: 1;
 }
 
-.note img {
-  width: 35px;
-  height: 35px;
+.nav-active {
+  background-color: #E7E7E7;
+  font-weight: bold;
 }

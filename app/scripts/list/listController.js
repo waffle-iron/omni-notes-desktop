@@ -1,8 +1,17 @@
-angular.module('ONApp').controller('listController', ['$rootScope', '$scope', '$q', '$log', 'NOTES_EVENT', 'notesService', 'storageService', '$mdDialog', function($rootScope, $scope, $q, $log, NOTES_EVENT, notesService, storageService, $mdDialog) {
+angular.module('ONApp').controller('listController', ['$rootScope', '$scope', '$q', '$log', 'CONSTANTS', 'notesService', 'storageService', '$mdDialog', function($rootScope, $scope, $q, $log, CONSTANTS, notesService, storageService, $mdDialog) {
 
     $scope.notesBackupFolder;
 
-    $rootScope.$on(NOTES_EVENT.LOADED, function(event, notes) {
+    $rootScope.$on(CONSTANTS.NOTES_LOADED, function(event, notes) {
+        $scope.notes = notes;
+        $scope.$applyAsync();
+    });
+
+    $rootScope.$on(CONSTANTS.NOTES_FILTERED, function(event, notes) {
+        $scope.notes = notes;
+    });
+
+    $rootScope.$on(CONSTANTS.NOTE_MODIFIED, function(event, notes) {
         $scope.notes = notes;
     });
 
@@ -38,6 +47,6 @@ angular.module('ONApp').controller('listController', ['$rootScope', '$scope', '$
         })
     }
 
-    $scope.notes = loadNotes();
+    loadNotes();
 
 }]);
