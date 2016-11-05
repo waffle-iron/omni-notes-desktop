@@ -3,7 +3,7 @@ angular.module('ONApp').controller('detailController', ['$rootScope', '$scope', 
     $scope.note = _.clone(note);
 
     $scope.saveNote = function() {
-        notesService.saveNote($scope.note);
+        notesService.saveNote($scope.note, true);
         $mdDialog.hide();
     }
 

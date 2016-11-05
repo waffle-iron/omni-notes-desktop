@@ -1,0 +1,19 @@
+<md-bottom-sheet class="md-list md-has-header">
+    <md-list ng-cloak>
+
+        <md-list-item ng-repeat="bottomSheetItem in bottomSheetItems">
+            <md-button ng-click="actionSelected(bottomSheetItem)" class="md-list-item-content">
+                <ng-md-icon icon="{{bottomSheetItem.icon}}" />
+                <span class="md-inline-list-icon-label">{{bottomSheetItem.title}}</span>
+            </md-button>
+        </md-list-item>
+        <!-- <md-list-item>
+            <md-button ng-click="archiveNotes()" class="md-list-item-content">
+                <ng-md-icon icon="archive" />
+                <span class="md-inline-list-icon-label">Archive</span>
+            </md-button>
+        </md-list-item> -->
+
+    </md-list>
+
+</md-bottom-sheet>

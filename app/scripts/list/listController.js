@@ -1,6 +1,7 @@
-angular.module('ONApp').controller('listController', ['$rootScope', '$scope', '$q', '$log', 'CONSTANTS', 'notesService', 'storageService', '$mdDialog', function($rootScope, $scope, $q, $log, CONSTANTS, notesService, storageService, $mdDialog) {
+angular.module('ONApp').controller('listController', ['$rootScope', '$scope', '$q', '$log', 'CONSTANTS', 'notesService', 'storageService', '$mdDialog', '$mdBottomSheet', '$mdToast', function($rootScope, $scope, $q, $log, CONSTANTS, notesService, storageService, $mdDialog, $mdBottomSheet, $mdToast) {
 
     $scope.notesBackupFolder;
+    $scope.selectedNotes = [];
 
     $rootScope.$on(CONSTANTS.NOTES_LOADED, function(event, notes) {
         $scope.notes = notes;
@@ -46,6 +47,29 @@ angular.module('ONApp').controller('listController', ['$rootScope', '$scope', '$
             }
         })
     }
+
+    $scope.archiveNotes = function() {
+        notesService.archiveNotes($scope.selectedNotes, true);
+    }
+
+    $scope.trashNotes = function() {
+        notesService.trashNotes($scope.selectedNotes, true);
+    }
+
+    $scope.showGridBottomSheet = function() {
+        $mdBottomSheet.show({
+            templateUrl: 'app/scripts/list/list-bottom-sheet-template.html',
+            controller: 'listBottomSheetController',
+            clickOutsideToClose: false
+        }).then(function(actionMethod, currentScope) {
+            $scope[actionMethod]();
+        });
+    };
+
+    $scope.doAction = function(note) {
+        $scope.selectedNotes.push(note);
+        $scope.showGridBottomSheet();
+    };
 
     loadNotes();
 

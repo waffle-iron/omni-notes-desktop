@@ -44,7 +44,7 @@ angular.module('ONApp').controller('drawerController', ['$rootScope', '$scope', 
         icon: 'settings'
     }];
 
-    $scope.activeItem = $scope.menu[0];
+    $scope.activeItem;
     $scope.categories = {};
 
     $rootScope.$on(CONSTANTS.NOTES_LOADED, function(event, notes) {

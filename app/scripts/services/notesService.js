@@ -40,7 +40,24 @@ angular.module("ONApp").service("notesService", ['$rootScope', '$log', 'CONSTANT
         $rootScope.$emit(CONSTANTS.NOTES_FILTERED, filteredNotes);
     };
 
-    this.saveNote = function(updatedNote, updateLastModification) {
+    this.saveNotes = function(updatedNotes, updateLastModification) {
+        var service = this;
+        _.each(updatedNotes, function(updateNote) {
+            service.saveNote(updateNote, updateLastModification, false);
+        })
+        $rootScope.$emit(CONSTANTS.NOTE_MODIFIED, notes);
+    };
+
+    this.archiveNotes = function(updatedNotes, archive) {
+        var service = this;
+        _.each(updatedNotes, function(updateNote) {
+            updateNote.archived = archive;
+            service.saveNote(updateNote, false, false);
+        })
+        $rootScope.$emit(CONSTANTS.NOTE_MODIFIED, notes);
+    };
+
+    this.saveNote = function(updatedNote, updateLastModification, emitEvent) {
         var now = new Date().getTime();
         updatedNote.lastModification = !updateLastModification ? updatedNote.lastModification : now;
         if (updatedNote.creation) {
@@ -55,7 +72,9 @@ angular.module("ONApp").service("notesService", ['$rootScope', '$log', 'CONSTANT
         storageService.get('notes_backup_folder').then(function(notesBackupFolder) {
             fs.writeFile(notesBackupFolder + '/' + updatedNote.creation + '.json', JSON.stringify(updatedNote), function(err) {
                 if (err) throw err;
-                $rootScope.$emit(CONSTANTS.NOTE_MODIFIED, notes);
+                if (!(false == emitEvent)) {
+                    $rootScope.$emit(CONSTANTS.NOTE_MODIFIED, notes);
+                }
             });
         });
     };
