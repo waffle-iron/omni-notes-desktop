@@ -20,7 +20,7 @@
     "desktop"
   ],
   "author": "Federico Iosue",
-  "license": "GPLv3",
+  "license": "GPL-3.0",
   "devDependencies": {
     "electron-prebuilt": "^0.37.2"
   },
