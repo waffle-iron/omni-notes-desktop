@@ -1,11 +1,11 @@
 <div layout="column">
 
     <md-input-container class="md-icon-float md-input-has-messages">
-        <input type="text" class="md-input" aria-label="{{InputView.formItem.config.placeholder}}" placeholder="Title" ng-model="note.title" value="{{note.title}}">
+        <input type="text" class="md-input" aria-label="Title" placeholder="Title" ng-model="note.title" value="{{note.title}}">
     </md-input-container>
 
     <md-input-container class="md-icon-float md-input-has-messages">
-        <textarea class="md-input" aria-label="{{InputView.formItem.config.placeholder}}" placeholder="Content" ng-model="note.content">{{note.content}}</textarea>
+        <textarea class="md-input" aria-label="Content" placeholder="Content" ng-model="note.content">{{note.content}}</textarea>
     </md-input-container>
 
     <md-button class="md-primary" style="margin-right:20px;" ng-click="saveNote()">Save</md-button>

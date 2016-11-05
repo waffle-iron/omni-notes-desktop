@@ -1,12 +1,14 @@
 <div ng-controller="listController">
     <section layout="row">
-        <div flex ng-include="'app/scripts/drawer/drawer.html'" layout="vertical"/>
+        <div flex ng-include="'app/scripts/drawer/drawer.html'" layout="vertical" />
         <md-content flex>
-            <md-list-item ng-repeat="note in notes track by note.creation" ng-click="editNote(note)">
-                <div ng-include="'app/scripts/list/note.html'" class="note-include" />
+
+            <md-list-item ng-repeat="note in notes track by note.creation" ng-click="editNote(note)" ng-right-click="doAction(note)" aria-label="Edit note">
+                <div ng-include=" 'app/scripts/list/note.html' " class="note-include " />
             </md-list-item>
-            <md-button class="md-warn md-fab md-fab-bottom-right" ng-click="editNote()">
-                <ng-md-icon icon="edit" class="md-default-theme" />
+
+            <md-button class="md-warn md-fab md-fab-bottom-right " ng-click="editNote() " aria-label="New note">
+                <ng-md-icon icon=" edit " class="md-default-theme " />
             </md-button>
         </md-content>
     </section>

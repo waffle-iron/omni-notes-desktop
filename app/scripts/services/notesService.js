@@ -11,7 +11,7 @@ angular.module("ONApp").service("notesService", ['$rootScope', '$log', 'CONSTANT
             });
             filtered.forEach(function(fileName) {
                 var filePath = backupFolderPath + '/' + fileName;
-                console.log('Reading content of file: ' + filePath);
+                $log.debug('Reading content of file: ' + filePath);
                 fs.readFile(filePath, function(err, data) {
                     var note = JSON.parse(data);
                     notes.push(note);
