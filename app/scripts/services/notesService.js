@@ -40,9 +40,9 @@ angular.module("ONApp").service("notesService", ['$rootScope', '$log', 'CONSTANT
         $rootScope.$emit(CONSTANTS.NOTES_FILTERED, filteredNotes);
     };
 
-    this.saveNote = function(updatedNote) {
+    this.saveNote = function(updatedNote, updateLastModification) {
         var now = new Date().getTime();
-        updatedNote.lastModification = now;
+        updatedNote.lastModification = !updateLastModification ? updatedNote.lastModification : now;
         if (updatedNote.creation) {
             var i = _.findIndex(notes, function(note) {
                 return note.creation == updatedNote.creation;
@@ -58,7 +58,18 @@ angular.module("ONApp").service("notesService", ['$rootScope', '$log', 'CONSTANT
                 $rootScope.$emit(CONSTANTS.NOTE_MODIFIED, notes);
             });
         });
-
     };
+
+    this.saveCategory = function(updatedCategory) {
+        updatedCategory.id = updatedCategory.id || new Date().getTime();
+        categories[updatedCategory.id] = updatedCategory;
+        notes = _.each(notes, function(note) {
+            if (note.category && note.category.id == updatedCategory.id) {
+                note.category = updatedCategory;
+            }
+            return note;
+        });
+        $rootScope.$emit(CONSTANTS.CATEGORY_MODIFIED, categories);
+    }
 
 }]);

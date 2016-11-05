@@ -56,6 +56,10 @@ angular.module('ONApp').controller('drawerController', ['$rootScope', '$scope', 
         //     });
     });
 
+    $rootScope.$on(CONSTANTS.CATEGORY_MODIFIED, function(event, categories) {
+        $scope.categories = categories;
+    });
+
     $scope.filterNotes = function(filterPredicate) {
         notesService.filterNotes(filterPredicate);
         $scope.activeItem = _.findWhere($scope.menu, {
@@ -69,6 +73,18 @@ angular.module('ONApp').controller('drawerController', ['$rootScope', '$scope', 
         });
         $scope.activeItem = category;
     };
+
+    $scope.editCategory = function(category) {
+        $mdDialog.show({
+            templateUrl: 'app/scripts/categories/category.html',
+            parent: angular.element(document.body),
+            clickOutsideToClose: true,
+            controller: 'categoryController',
+            locals: {
+                category: category
+            }
+        })
+    }
 
     $scope.showSettings = function(ev) {
         $mdDialog.show({

@@ -10,7 +10,8 @@
         </md-list-item>
 
         <!-- Categories -->
-        <md-list-item class="menu-item md-2-line" ng-repeat="(key, category) in categories" role="link"ng-click="filterCategory(category)" ng-class="{'nav-active': category == activeItem}">
+        <md-divider ng-if="categories.length" />
+        <md-list-item class="menu-item md-2-line" ng-repeat="(key, category) in categories" role="link" ng-click="filterCategory(category)" ng-right-click="editCategory(category)" ng-class="{'nav-active': category == activeItem}">
             <ng-md-icon icon="label" style="fill: {{category.color}}" />
             <div class="md-list-item-text">
                 <span>{{category.name}}</span>
