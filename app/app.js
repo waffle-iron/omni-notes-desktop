@@ -20,5 +20,4 @@ var ONApp;
                 redirectTo: '/'
             });
         }]);
-
 })();

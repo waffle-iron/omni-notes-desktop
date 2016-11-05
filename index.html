@@ -9,8 +9,11 @@
 </head>
 
 <body>
-    <div ng-include="'app/scripts/toolbar/toolbar.html'"></div>
-    <ng-view id="rootView" ng-cloak></ng-view>
+
+    <div layout="column">
+        <div ng-include="'app/scripts/toolbar/toolbar.html'"></div>
+        <ng-view id="rootView" ng-cloak></ng-view>
+    </div>
 
     <script>
         window.$ = window.jQuery = require('./node_modules/jquery/dist/jquery.js');
@@ -35,6 +38,7 @@
     <script src="./app/scripts/detail/detailController.js"></script>
     <script src="./app/scripts/settings/settingsController.js"></script>
     <script src="./app/scripts/settings/uploadDirective.js"></script>
+    <script src="./app/scripts/directives/focusDirective.js"></script>
 
 </body>
 

@@ -6,6 +6,10 @@
     -webkit-app-region: no-drag;
 }
 
+.toolbar md-button {
+    -webkit-app-region: no-drag;
+}
+
 .menu-item ng-md-icon {
     margin: auto;
     margin-right: 15px;
