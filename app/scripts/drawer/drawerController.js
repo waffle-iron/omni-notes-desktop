@@ -36,6 +36,7 @@ angular.module('ONApp').controller('drawerController', ['$rootScope', '$scope', 
         title: 'Uncategorized',
         icon: 'folder_open'
     }];
+
     $scope.menuFooter = [{
         method: 'showSettings',
         params: '',
@@ -52,11 +53,23 @@ angular.module('ONApp').controller('drawerController', ['$rootScope', '$scope', 
     //     });
     // });
 
+    $scope.categories = {};
+
+    $rootScope.$on(CONSTANTS.NOTES_LOADED, function(event, notes) {
+        $scope.categories = notesService.getCategories();
+    });
+
     $scope.filterNotes = function(filterPredicate) {
         notesService.filterNotes(filterPredicate);
         $scope.activeItem = _.findWhere($scope.menu, {
             params: filterPredicate
         });
+    };
+    $scope.filterCategory = function(categoryId) {
+        notesService.filterNotes(function(note) {
+            return note.category && note.category.id == categoryId;
+        });
+        $scope.activeItem = $scope.categories[categoryId];
     };
 
     $scope.showSettings = function(ev) {

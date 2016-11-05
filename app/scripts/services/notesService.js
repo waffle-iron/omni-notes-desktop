@@ -1,10 +1,10 @@
-angular.module("ONApp").service("notesService", ['$rootScope', 'CONSTANTS', 'storageService', function($rootScope, CONSTANTS, storageService) {
+angular.module("ONApp").service("notesService", ['$rootScope', '$log', 'CONSTANTS', 'storageService', function($rootScope, $log, CONSTANTS, storageService) {
 
     var fs = require('fs');
     var notes = [];
+    var categories = {};
 
     this.loadNotes = function(backupFolderPath) {
-        notes = [];
         fs.readdir(backupFolderPath, function(err, files) {
             var filtered = files.filter(function(fileName) {
                 return new RegExp("[0-9]{13}\\.json").test(fileName);
@@ -13,7 +13,11 @@ angular.module("ONApp").service("notesService", ['$rootScope', 'CONSTANTS', 'sto
                 var filePath = backupFolderPath + '/' + fileName;
                 console.log('Reading content of file: ' + filePath);
                 fs.readFile(filePath, function(err, data) {
-                    notes.push(JSON.parse(data));
+                    var note = JSON.parse(data);
+                    notes.push(note);
+                    if (note.category) {
+                        categories[note.category.id] = note.category;
+                    }
                     if (notes.length == filtered.length) {
                         storageService.put('notes_backup_folder', backupFolderPath);
                         $rootScope.$emit(CONSTANTS.NOTES_LOADED, notes);
@@ -25,6 +29,10 @@ angular.module("ONApp").service("notesService", ['$rootScope', 'CONSTANTS', 'sto
 
     this.getNotes = function() {
         return notes;
+    };
+
+    this.getCategories = function() {
+        return categories;
     };
 
     this.filterNotes = function(filterPredicate) {
