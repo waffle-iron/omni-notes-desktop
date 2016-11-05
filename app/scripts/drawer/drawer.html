@@ -1,17 +1,17 @@
 <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true">
     <md-content ng-controller='drawerController' flex>
-      
+
         <!-- Menu -->
-        <md-list-item class="menu-item md-2-line" ng-repeat="item in menu" role="link" md-ink-ripple ng-click="this[item.method](item.params)" ng-class="{'nav-active': item == activeItem}">
-            <ng-md-icon icon="{{item.icon}}" class="md-default-theme"/>
+        <md-list-item class="menu-item md-2-line" ng-repeat="item in menu" role="link" ng-click="this[item.method](item.params)" ng-class="{'nav-active': item == activeItem}">
+            <ng-md-icon icon="{{item.icon}}" />
             <div class="md-list-item-text">
                 <span>{{item.title}}</span>
             </div>
         </md-list-item>
 
         <!-- Categories -->
-        <md-list-item class="menu-item md-2-line" ng-repeat="(key, category) in categories" role="link" ng-click="filterCategory(category.id)" md-ink-ripple ng-class="{'nav-active': item == activeItem}">
-            <ng-md-icon icon="label" class="md-default-theme" style="fill: {{category.color}}"/>
+        <md-list-item class="menu-item md-2-line" ng-repeat="(key, category) in categories" role="link"ng-click="filterCategory(category)" ng-class="{'nav-active': category == activeItem}">
+            <ng-md-icon icon="label" style="fill: {{category.color}}" />
             <div class="md-list-item-text">
                 <span>{{category.name}}</span>
             </div>
@@ -19,7 +19,7 @@
 
         <!-- Footer -->
         <md-divider />
-        <md-list-item class="menu-item md-2-line" ng-repeat="item in menuFooter" role="link" md-ink-ripple ng-click="this[item.method](item.params)">
+        <md-list-item class="menu-item md-2-line" ng-repeat="item in menuFooter" role="link" ng-click="this[item.method](item.params)">
             <ng-md-icon icon="{{item.icon}}" />
             <div class="md-list-item-text">
                 <span>{{item.title}}</span>

@@ -44,19 +44,16 @@ angular.module('ONApp').controller('drawerController', ['$rootScope', '$scope', 
         icon: 'settings'
     }];
 
-    // FIXME: Directly filter notes on application start (WIP)
-    // $scope.activeItem = $scope.menu[0];
-    //
-    // $rootScope.$on(CONSTANTS.NOTES_LOADED, function(event, notes) {
-    //     setTimeout(function() {
-    //         $scope.filterNotes($scope.menu[0].params);
-    //     });
-    // });
-
+    $scope.activeItem = $scope.menu[0];
     $scope.categories = {};
 
     $rootScope.$on(CONSTANTS.NOTES_LOADED, function(event, notes) {
         $scope.categories = notesService.getCategories();
+        // FIXME: Directly filter notes on application start (WIP)
+        // $rootScope.$on(CONSTANTS.NOTES_LOADED, function(event, notes) {
+        //     setTimeout(function() {
+        //         $scope.filterNotes($scope.menu[0].params);
+        //     });
     });
 
     $scope.filterNotes = function(filterPredicate) {
@@ -65,11 +62,12 @@ angular.module('ONApp').controller('drawerController', ['$rootScope', '$scope', 
             params: filterPredicate
         });
     };
-    $scope.filterCategory = function(categoryId) {
+
+    $scope.filterCategory = function(category) {
         notesService.filterNotes(function(note) {
-            return note.category && note.category.id == categoryId;
+            return note.category && note.category.id == category.id;
         });
-        $scope.activeItem = $scope.categories[categoryId];
+        $scope.activeItem = category;
     };
 
     $scope.showSettings = function(ev) {
