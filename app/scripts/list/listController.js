@@ -1,28 +1,13 @@
 angular.module('ONApp').controller('listController', ['$rootScope', '$scope', '$q', '$log', 'CONSTANTS', 'notesService', 'storageService', '$mdDialog', '$mdBottomSheet', '$mdToast', function($rootScope, $scope, $q, $log, CONSTANTS, notesService, storageService, $mdDialog, $mdBottomSheet, $mdToast) {
 
-    $scope.notesBackupFolder;
+    $scope.notesBackupFolder = storageService.get('notes_backup_folder');
+    $scope.notes = [];
     $scope.selectedNotes = [];
-
-    $rootScope.$on(CONSTANTS.NOTES_LOADED, function(event, notes) {
-        $scope.notes = notes;
-        $scope.$applyAsync();
-    });
 
     $rootScope.$on(CONSTANTS.NOTES_FILTERED, function(event, notes) {
         $scope.notes = notes;
+        $scope.$applyAsync();
     });
-
-    $rootScope.$on(CONSTANTS.NOTE_MODIFIED, function(event, notes) {
-        $scope.notes = notes;
-    });
-
-    loadNotes = function() {
-        storageService.get('notes_backup_folder').then(function(notesBackupFolder) {
-            notesService.loadNotes(notesBackupFolder);
-            $scope.notesBackupFolder = notesBackupFolder;
-        });
-        return [];
-    }
 
     $scope.getNoteThumbnail = function(note) {
         return note.attachmentsList && note.attachmentsList.length ?
@@ -71,6 +56,6 @@ angular.module('ONApp').controller('listController', ['$rootScope', '$scope', '$
         $scope.showGridBottomSheet();
     };
 
-    loadNotes();
+    notesService.loadNotes($scope.notesBackupFolder);
 
 }]);

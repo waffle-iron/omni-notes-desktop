@@ -5,26 +5,28 @@ angular.module("ONApp").service("notesService", ['$rootScope', '$log', 'CONSTANT
     var categories = {};
 
     this.loadNotes = function(backupFolderPath) {
-        fs.readdir(backupFolderPath, function(err, files) {
-            var filtered = files.filter(function(fileName) {
-                return new RegExp("[0-9]{13}\\.json").test(fileName);
-            });
-            filtered.forEach(function(fileName) {
-                var filePath = backupFolderPath + '/' + fileName;
-                $log.debug('Reading content of file: ' + filePath);
-                fs.readFile(filePath, function(err, data) {
-                    var note = JSON.parse(data);
-                    notes.push(note);
-                    if (note.category) {
-                        categories[note.category.id] = note.category;
-                    }
-                    if (notes.length == filtered.length) {
-                        storageService.put('notes_backup_folder', backupFolderPath);
-                        $rootScope.$emit(CONSTANTS.NOTES_LOADED, notes);
-                    }
+        if (backupFolderPath) {
+            fs.readdir(backupFolderPath, function(err, files) {
+                var filtered = files.filter(function(fileName) {
+                    return new RegExp("[0-9]{13}\\.json").test(fileName);
+                });
+                filtered.forEach(function(fileName) {
+                    var filePath = backupFolderPath + '/' + fileName;
+                    $log.debug('Reading content of file: ' + filePath);
+                    fs.readFile(filePath, function(err, data) {
+                        var note = JSON.parse(data);
+                        notes.push(note);
+                        if (note.category) {
+                            categories[note.category.id] = note.category;
+                        }
+                        if (notes.length == filtered.length) {
+                            storageService.put('notes_backup_folder', backupFolderPath);
+                            $rootScope.$emit(CONSTANTS.NOTES_LOADED, notes);
+                        }
+                    });
                 });
             });
-        });
+        }
     };
 
     this.getNotes = function() {
@@ -69,13 +71,11 @@ angular.module("ONApp").service("notesService", ['$rootScope', '$log', 'CONSTANT
             updatedNote.creation = now;
             notes.push(updatedNote);
         }
-        storageService.get('notes_backup_folder').then(function(notesBackupFolder) {
-            fs.writeFile(notesBackupFolder + '/' + updatedNote.creation + '.json', JSON.stringify(updatedNote), function(err) {
-                if (err) throw err;
-                if (!(false == emitEvent)) {
-                    $rootScope.$emit(CONSTANTS.NOTE_MODIFIED, notes);
-                }
-            });
+        fs.writeFile(storageService.get('notes_backup_folder') + '/' + updatedNote.creation + '.json', JSON.stringify(updatedNote), function(err) {
+            if (err) throw err;
+            if (!(false == emitEvent)) {
+                $rootScope.$emit(CONSTANTS.NOTE_MODIFIED, notes);
+            }
         });
     };
 

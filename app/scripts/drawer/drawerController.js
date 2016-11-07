@@ -1,36 +1,31 @@
-angular.module('ONApp').controller('drawerController', ['$rootScope', '$scope', '$q', '$log', '$mdDialog', 'notesService', 'CONSTANTS', function($rootScope, $scope, $q, $log, $mdDialog, notesService, CONSTANTS) {
+angular.module('ONApp').controller('drawerController', ['$rootScope', '$scope', '$q', '$log', '$mdDialog', 'notesService', 'CONSTANTS', 'navigationService', function($rootScope, $scope, $q, $log, $mdDialog, notesService, CONSTANTS, navigationService) {
 
     $scope.menu = [{
-        method: 'filterNotes',
-        params: function(note) {
+        filterPredicate: function(note) {
             return !note.archived && !note.trashed;
         },
         title: 'Notes',
         icon: 'insert_drive_file'
     }, {
-        method: 'filterNotes',
-        params: function(note) {
+        filterPredicate: function(note) {
             return note.alarm;
         },
         title: 'Reminders',
         icon: 'alarm'
     }, {
-        method: 'filterNotes',
-        params: function(note) {
+        filterPredicate: function(note) {
             return note.archived && !note.trashed;
         },
         title: 'Archive',
         icon: 'archive'
     }, {
-        method: 'filterNotes',
-        params: function(note) {
+        filterPredicate: function(note) {
             return note.trashed;
         },
         title: 'Trash',
         icon: 'delete'
     }, {
-        method: 'filterNotes',
-        params: function(note) {
+        filterPredicate: function(note) {
             return !note.category;
         },
         title: 'Uncategorized',
@@ -39,40 +34,52 @@ angular.module('ONApp').controller('drawerController', ['$rootScope', '$scope', 
 
     $scope.menuFooter = [{
         method: 'showSettings',
-        params: '',
         title: 'Settings',
         icon: 'settings'
     }];
 
-    $scope.activeItem;
     $scope.categories = {};
 
     $rootScope.$on(CONSTANTS.NOTES_LOADED, function(event, notes) {
         $scope.categories = notesService.getCategories();
-        // FIXME: Directly filter notes on application start (WIP)
-        // $rootScope.$on(CONSTANTS.NOTES_LOADED, function(event, notes) {
-        //     setTimeout(function() {
-        //         $scope.filterNotes($scope.menu[0].params);
-        //     });
+        filterOnNotesEvent();
     });
+
+    $rootScope.$on(CONSTANTS.NOTE_MODIFIED, function(event, notes) {
+        filterOnNotesEvent();
+    });
+
+    function filterOnNotesEvent() {
+        var navigationItem = navigationService.getNavigation();
+        var navigationItemMenu = _.findWhere($scope.menu, {
+            title: navigationItem.title
+        });
+        if (navigationItemMenu) {
+            $scope.filterNotes(navigationItemMenu);
+        } else {
+            $scope.filterCategory(navigationItem);
+        }
+    }
 
     $rootScope.$on(CONSTANTS.CATEGORY_MODIFIED, function(event, categories) {
         $scope.categories = categories;
     });
 
-    $scope.filterNotes = function(filterPredicate) {
-        notesService.filterNotes(filterPredicate);
-        $scope.activeItem = _.findWhere($scope.menu, {
-            params: filterPredicate
-        });
+    $scope.filterNotes = function(item) {
+        notesService.filterNotes(item.filterPredicate);
+        navigationService.setNavigation(item);
     };
 
     $scope.filterCategory = function(category) {
         notesService.filterNotes(function(note) {
             return note.category && note.category.id == category.id;
         });
-        $scope.activeItem = category;
+        navigationService.setNavigation(category);
     };
+
+    $scope.isCurrentNavigation = function(item) {
+        return navigationService.isCurrentNavigation(item);
+    }
 
     $scope.editCategory = function(category) {
         $mdDialog.show({

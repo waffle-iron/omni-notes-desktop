@@ -10,7 +10,8 @@ var ONApp;
             'ngMaterial',
             'ngAnimate',
             'ngMdIcons',
-            'colorpicker.module'
+            'colorpicker.module',
+            'LocalStorageModule'
         ])
         .config(['$routeProvider', function($routeProvider) {
             $routeProvider
