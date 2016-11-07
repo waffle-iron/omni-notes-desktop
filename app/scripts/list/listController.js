@@ -1,8 +1,24 @@
-angular.module('ONApp').controller('listController', ['$rootScope', '$scope', '$q', '$log', 'CONSTANTS', 'notesService', 'storageService', '$mdDialog', '$mdBottomSheet', '$mdToast', function($rootScope, $scope, $q, $log, CONSTANTS, notesService, storageService, $mdDialog, $mdBottomSheet, $mdToast) {
+angular.module('ONApp').controller('listController', ['$rootScope', '$scope', '$q', '$log', 'CONSTANTS', 'notesService', 'storageService', '$mdDialog', '$mdBottomSheet', '$mdToast', 'hotkeys', function($rootScope, $scope, $q, $log, CONSTANTS, notesService, storageService, $mdDialog, $mdBottomSheet, $mdToast, hotkeys) {
 
     $scope.notesBackupFolder = storageService.get('notes_backup_folder');
     $scope.notes = [];
     $scope.selectedNotes = [];
+
+    // Keyboard shortcuts
+    hotkeys.add({
+        combo: 'ctrl+n',
+        description: 'New note',
+        callback: function() {
+            $scope.editNote();
+        }
+    });
+    hotkeys.add({
+        combo: 'ctrl+s',
+        description: 'Save note or category',
+        callback: function() {
+            // Does nothing, just to fill shortcuts' spreadsheet
+        }
+    });
 
     $rootScope.$on(CONSTANTS.NOTES_FILTERED, function(event, notes) {
         $scope.notes = notes;

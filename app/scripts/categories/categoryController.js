@@ -1,6 +1,15 @@
-angular.module('ONApp').controller('categoryController', ['$rootScope', '$scope', '$q', '$log', 'CONSTANTS', 'notesService', 'storageService', 'category', '$mdDialog', function($rootScope, $scope, $q, $log, CONSTANTS, notesService, storageService, category, $mdDialog) {
+angular.module('ONApp').controller('categoryController', ['$rootScope', '$scope', '$q', '$log', 'CONSTANTS', 'notesService', 'category', '$mdDialog', 'hotkeys', function($rootScope, $scope, $q, $log, CONSTANTS, notesService, category, $mdDialog, hotkeys) {
 
     $scope.category = _.clone(category);
+
+    // Keyboard shortcuts
+    hotkeys.add({
+        combo: 'ctrl+s',
+        allowIn: ['INPUT', 'SELECT', 'TEXTAREA'],
+        callback: function() {
+            $scope.saveCategory();
+        }
+    });
 
     $scope.customSettings = {
         control: 'brightness',

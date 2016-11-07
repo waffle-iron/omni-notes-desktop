@@ -11,7 +11,8 @@ var ONApp;
             'ngAnimate',
             'ngMdIcons',
             'colorpicker.module',
-            'LocalStorageModule'
+            'LocalStorageModule',
+            'cfp.hotkeys'
         ])
         .config(['$routeProvider', function($routeProvider) {
             $routeProvider

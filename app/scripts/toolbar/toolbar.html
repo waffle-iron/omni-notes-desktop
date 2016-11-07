@@ -13,6 +13,9 @@
                 </md-button>
                 <md-menu-content width="2">
                     <md-menu-item>
+                        <md-button ng-click="toggleHelp()"> <span md-menu-align-target>Shortcuts</span></md-button>
+                    </md-menu-item>
+                    <md-menu-item>
                         <md-button ng-click="exit()"> <span md-menu-align-target>Exit</span></md-button>
                     </md-menu-item>
                 </md-menu-content>
@@ -26,7 +29,7 @@
                 <ng-md-icon icon="arrow_back"></ng-md-icon>
             </md-button>
             <md-input-container flex>
-                <input type="text" placeholder="enter search" ng-model="searchQuery" ng-change="queryChanged()" focus="{{showSearch}}"/>
+                <input type="text" placeholder="enter search" ng-model="searchQuery" ng-change="queryChanged()" focus="{{showSearch}}" />
             </md-input-container>
         </div>
     </md-toolbar>

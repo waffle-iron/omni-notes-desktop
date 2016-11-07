@@ -1,7 +1,17 @@
-angular.module('ONApp').controller('toolbarController', ["$scope", '$q', '$log', '$window', 'notesService', function($scope, $q, $log, $window, notesService) {
+angular.module('ONApp').controller('toolbarController', ["$scope", '$q', '$log', '$window', 'notesService', 'hotkeys', function($scope, $q, $log, $window, notesService, hotkeys) {
 
     $scope.showSearch = false;
     $scope.searchQuery;
+
+    // Keyboard shortcuts
+    hotkeys.add({
+        combo: 'ctrl+f',
+        description: 'Toggle search',
+        allowIn: ['INPUT', 'SELECT', 'TEXTAREA'],
+        callback: function() {
+            $scope.showSearch = !$scope.showSearch;
+        }
+    });
 
     $scope.exit = function() {
         $window.close();
@@ -20,5 +30,10 @@ angular.module('ONApp').controller('toolbarController', ["$scope", '$q', '$log',
             $scope.queryChanged();
         }
     });
+
+    $scope.toggleHelp = function() {
+        $log.info(hotkeys);
+        hotkeys.toggleCheatSheet();
+    }
 
 }]);
