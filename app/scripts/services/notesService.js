@@ -61,7 +61,7 @@ angular.module("ONApp").service("notesService", ['$rootScope', '$log', 'CONSTANT
 
     this.saveNote = function(updatedNote, updateLastModification, emitEvent) {
         var now = new Date().getTime();
-        updatedNote.lastModification = !updateLastModification ? updatedNote.lastModification : now;
+        updatedNote.lastModification = !updateLastModification ? updatedNote.lastModification || now : now;
         if (updatedNote.creation) {
             var i = _.findIndex(notes, function(note) {
                 return note.creation == updatedNote.creation;

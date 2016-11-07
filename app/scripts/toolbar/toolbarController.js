@@ -9,8 +9,8 @@ angular.module('ONApp').controller('toolbarController', ["$scope", '$q', '$log',
 
     $scope.queryChanged = function() {
         notesService.filterNotes(function(note) {
-            return (note.title && note.title.indexOf($scope.searchQuery) !== -1) ||
-                (note.content && note.content.indexOf($scope.searchQuery) !== -1);
+            return (note.title && new RegExp($scope.searchQuery, "i").test(note.title)) ||
+                (note.content && new RegExp($scope.searchQuery, "i").test(note.content));
         });
     }
 
