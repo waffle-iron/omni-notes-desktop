@@ -1,5 +1,5 @@
-<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true">
-    <md-content ng-controller='drawerController' flex>
+<md-sidenav id="sidenav" md-is-locked-open="true">
+    <div ng-controller='drawerController'>
 
         <!-- Menu -->
         <md-list-item class="menu-item md-2-line" ng-repeat="item in menu" role="link" ng-click="filterNotes(item)" ng-class="{'nav-active': isCurrentNavigation(item)}">
@@ -27,5 +27,5 @@
             </div>
         </md-list-item>
 
-    </md-content>
+    </div>
 </md-sidenav>

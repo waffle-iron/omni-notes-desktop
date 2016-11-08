@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="ONApp">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -10,10 +10,12 @@
     <link rel="stylesheet" href="./node_modules/angular-hotkeys/build/hotkeys.min.css" />
 </head>
 
-<body>
+<body ng-app="ONApp" layout="column">
 
-    <div layout="column">
-        <div ng-include="'app/scripts/toolbar/toolbar.html'"></div>
+    <!-- <div id="drag-handler" md-colors="{background: 'primary-700'}"></div> -->
+    <div ng-include="'app/scripts/toolbar/toolbar.html'"></div>
+    <div role="main" layout="row">
+        <div ng-include="'app/scripts/drawer/drawer.html'"></div>
         <ng-view id="rootView" ng-cloak></ng-view>
     </div>
 

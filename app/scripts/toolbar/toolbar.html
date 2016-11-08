@@ -1,8 +1,9 @@
 <div ng-controller='toolbarController'>
 
+    <!-- Standard toolbar -->
     <md-toolbar ng-show="!showSearch">
         <div class="md-toolbar-tools">
-            <h1><span>Omni Notes</span></h1>
+            <span>Omni Notes</span>
             <span flex></span>
             <md-button aria-label="Search" ng-click="showSearch = !showSearch">
                 <ng-md-icon icon="search" />
@@ -23,6 +24,7 @@
         </div>
     </md-toolbar>
 
+    <!-- Search toolbar -->
     <md-toolbar ng-show="showSearch">
         <div class="md-toolbar-tools">
             <md-button ng-click="showSearch = !showSearch" aria-label="Back">
