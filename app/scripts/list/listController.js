@@ -94,23 +94,32 @@ angular.module('ONApp').controller('listController', ['$rootScope', '$scope', '$
         })
     }
 
+    // Bulk actions
+
+    $scope.showGridBottomSheet = function() {
+        $mdBottomSheet.show({
+            templateUrl: 'app/scripts/list/list-bottom-sheet-template.html',
+            controller: 'listBottomSheetController'
+        }).then(function(actionMethod, currentScope) {
+            $scope[actionMethod]();
+        });
+    };
+
     $scope.archiveNotes = function() {
         notesService.archiveNotes($scope.selectedNotes, true);
+    }
+
+    $scope.restoreFromArchiveNotes = function() {
+        notesService.archiveNotes($scope.selectedNotes, false);
     }
 
     $scope.trashNotes = function() {
         notesService.trashNotes($scope.selectedNotes, true);
     }
 
-    $scope.showGridBottomSheet = function() {
-        $mdBottomSheet.show({
-            templateUrl: 'app/scripts/list/list-bottom-sheet-template.html',
-            controller: 'listBottomSheetController',
-            clickOutsideToClose: false
-        }).then(function(actionMethod, currentScope) {
-            $scope[actionMethod]();
-        });
-    };
+    $scope.restoreFromTrashNotes = function() {
+        notesService.trashNotes($scope.selectedNotes, false);
+    }
 
     notesService.loadNotes($scope.notesBackupFolder);
 

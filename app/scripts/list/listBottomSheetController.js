@@ -1,15 +1,29 @@
-angular.module('ONApp').controller('listBottomSheetController', ['$rootScope', '$scope', '$q', '$log', 'CONSTANTS', 'notesService', 'storageService', '$mdDialog', '$mdBottomSheet', '$mdToast', function($rootScope, $scope, $q, $log, CONSTANTS, notesService, storageService, $mdDialog, $mdBottomSheet, $mdToast) {
+angular.module('ONApp').controller('listBottomSheetController', ['$rootScope', '$scope', '$q', '$log', '$mdBottomSheet', 'navigationService', function($rootScope, $scope, $q, $log, $mdBottomSheet, navigationService) {
 
     $scope.bottomSheetItems = [{
         method: 'archiveNotes',
         params: '',
-        title: 'Archive notes',
-        icon: 'archive'
+        title: 'Archive',
+        icon: 'archive',
+        show: navigationService.getNavigation().title == 'Notes'
+    }, {
+        method: 'restoreFromArchiveNotes',
+        params: '',
+        title: 'Restore from archive',
+        icon: 'unarchive',
+        show: navigationService.getNavigation().title == 'Archive'
     }, {
         method: 'trashNotes',
         params: '',
-        title: 'Trash notes',
-        icon: 'delete'
+        title: 'Trash',
+        icon: 'delete',
+        show: navigationService.getNavigation().title != 'Trash'
+    }, {
+        method: 'restoreFromTrashNotes',
+        params: '',
+        title: 'Restore from trash',
+        icon: 'delete_sweep',
+        show: navigationService.getNavigation().title == 'Trash'
     }];
 
 
