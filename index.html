@@ -5,14 +5,13 @@
     <meta charset="UTF-8">
     <title>Omni Notes</title>
     <link rel="stylesheet" href="./app/assets/css/common.css" />
-    <link rel="stylesheet" href="./node_modules/angular-material/angular-material.css" />
+    <link rel="stylesheet" href="./node_modules/angular-material/angular-material.min.css" />
     <link rel="stylesheet" href="./node_modules/angular-bootstrap-colorpicker/css/colorpicker.min.css" />
     <link rel="stylesheet" href="./node_modules/angular-hotkeys/build/hotkeys.min.css" />
 </head>
 
 <body ng-app="ONApp" layout="column">
 
-    <!-- <div id="drag-handler" md-colors="{background: 'primary-700'}"></div> -->
     <div ng-include="'app/scripts/toolbar/toolbar.html'"></div>
     <div role="main" layout="row">
         <div ng-include="'app/scripts/drawer/drawer.html'"></div>
