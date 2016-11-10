@@ -1,7 +1,7 @@
 <div ng-controller='toolbarController'>
 
     <!-- Standard toolbar -->
-    <md-toolbar ng-show="!showSearch">
+    <md-toolbar ng-show="!showSearch && !multiSelection">
         <div class="md-toolbar-tools">
             <span>Omni Notes</span>
             <span flex></span>
@@ -25,14 +25,28 @@
     </md-toolbar>
 
     <!-- Search toolbar -->
-    <md-toolbar ng-show="showSearch">
+    <md-toolbar ng-show="showSearch" md-hue-1 md-default-theme>
         <div class="md-toolbar-tools">
             <md-button ng-click="showSearch = !showSearch" aria-label="Back">
                 <ng-md-icon icon="arrow_back"></ng-md-icon>
             </md-button>
-            <md-input-container flex>
-                <input type="text" placeholder="enter search" ng-model="searchQuery" ng-change="queryChanged()" focus="{{showSearch}}" />
+            <md-input-container flex md-no-float>
+                <input placeholder="Enter search" ng-model="searchQuery" ng-change="queryChanged()" focus="{{showSearch}}" />
             </md-input-container>
+        </div>
+    </md-toolbar>
+
+    <!-- Multi-selection toolbar -->
+    <md-toolbar ng-show="multiSelection">
+        <div class="md-toolbar-tools">
+            <md-button ng-click="confirmMultiSelection(false)" aria-label="Back">
+                <ng-md-icon icon="arrow_back"></ng-md-icon>
+            </md-button>
+            {{multiSelectionNumber}}
+            <span flex></span>
+            <md-button ng-click="confirmMultiSelection(true)" aria-label="Confirm selection">
+                Confirm
+            </md-button>
         </div>
     </md-toolbar>
 

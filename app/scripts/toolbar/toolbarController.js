@@ -1,6 +1,7 @@
-angular.module('ONApp').controller('toolbarController', ["$scope", '$q', '$log', '$window', 'notesService', 'hotkeys', function($scope, $q, $log, $window, notesService, hotkeys) {
+angular.module('ONApp').controller('toolbarController', ['$rootScope', '$scope', '$q', '$log', '$window', 'CONSTANTS', 'notesService', 'hotkeys', function($rootScope, $scope, $q, $log, $window, CONSTANTS, notesService, hotkeys) {
 
     $scope.showSearch = false;
+    $scope.multiSelection = false;
     $scope.searchQuery;
 
     // Keyboard shortcuts
@@ -11,6 +12,11 @@ angular.module('ONApp').controller('toolbarController', ["$scope", '$q', '$log',
         callback: function() {
             $scope.showSearch = !$scope.showSearch;
         }
+    });
+
+    $rootScope.$on(CONSTANTS.NOTES_SELECTED, function(event, notes) {
+        $scope.multiSelection = notes.length > 0;
+        $scope.multiSelectionNumber = notes.length;
     });
 
     $scope.exit = function() {
@@ -24,8 +30,10 @@ angular.module('ONApp').controller('toolbarController', ["$scope", '$q', '$log',
         });
     }
 
-    $scope.$watch('showSearch', function(value) {
-        if (!value) {
+    $scope.$watch('showSearch', function(show) {
+        if (show) {
+            $rootScope.$emit(CONSTANTS.NOTES_SELECTED_CONFIRM, false);
+        } else {
             $scope.searchQuery = '';
             $scope.queryChanged();
         }
@@ -34,6 +42,10 @@ angular.module('ONApp').controller('toolbarController', ["$scope", '$q', '$log',
     $scope.toggleHelp = function() {
         $log.info(hotkeys);
         hotkeys.toggleCheatSheet();
+    }
+
+    $scope.confirmMultiSelection = function(confirmed) {
+        $rootScope.$emit(CONSTANTS.NOTES_SELECTED_CONFIRM, confirmed);
     }
 
 }]);

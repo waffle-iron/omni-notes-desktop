@@ -3,6 +3,7 @@ angular.module('ONApp').controller('listController', ['$rootScope', '$scope', '$
     $scope.notesBackupFolder = storageService.get('notes_backup_folder');
     $scope.notes = [];
     $scope.selectedNotes = [];
+    $scope.multiSelection = false;
 
     // Keyboard shortcuts
     hotkeys.add({
@@ -21,8 +22,17 @@ angular.module('ONApp').controller('listController', ['$rootScope', '$scope', '$
     });
 
     $rootScope.$on(CONSTANTS.NOTES_FILTERED, function(event, notes) {
+        $scope.cancelMultiSelection();
         $scope.notes = notes;
         $scope.$applyAsync();
+    });
+
+    $rootScope.$on(CONSTANTS.NOTES_SELECTED_CONFIRM, function(event, confirmed) {
+        if (confirmed) {
+            $scope.showGridBottomSheet();
+        } else {
+            $scope.cancelMultiSelection();
+        }
     });
 
     $scope.getNoteThumbnail = function(note) {
@@ -37,7 +47,42 @@ angular.module('ONApp').controller('listController', ['$rootScope', '$scope', '$
             '';
     }
 
+    $scope.noteClicked = function(note) {
+        if (!$scope.multiSelection) {
+            $scope.editNote(note);
+        } else {
+            selectNote(note);
+        }
+    }
+
+    $scope.noteRightClicked = function(note) {
+        if (!$scope.multiSelection) {
+            $scope.multiSelection = true;
+        }
+        selectNote(note);
+    }
+
+    var selectNote = function(note) {
+        if (!_.contains($scope.selectedNotes, note)) {
+            $scope.selectedNotes.push(note);
+        } else {
+            $scope.selectedNotes = _.without($scope.selectedNotes, note);
+        }
+        $rootScope.$emit(CONSTANTS.NOTES_SELECTED, $scope.selectedNotes);
+    }
+
+    $scope.cancelMultiSelection = function() {
+        $scope.selectedNotes = [];
+        $scope.multiSelection = false;
+        $rootScope.$emit(CONSTANTS.NOTES_SELECTED, $scope.selectedNotes);
+    }
+
+    $scope.showAsSelected = function(note) {
+        return $scope.multiSelection && _.contains($scope.selectedNotes, note);
+    }
+
     $scope.editNote = function(note) {
+        $scope.cancelMultiSelection();
         $mdDialog.show({
             templateUrl: 'app/scripts/detail/detail.html',
             parent: angular.element(document.body),
@@ -65,11 +110,6 @@ angular.module('ONApp').controller('listController', ['$rootScope', '$scope', '$
         }).then(function(actionMethod, currentScope) {
             $scope[actionMethod]();
         });
-    };
-
-    $scope.doAction = function(note) {
-        $scope.selectedNotes.push(note);
-        $scope.showGridBottomSheet();
     };
 
     notesService.loadNotes($scope.notesBackupFolder);

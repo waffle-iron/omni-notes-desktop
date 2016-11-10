@@ -59,6 +59,15 @@ angular.module("ONApp").service("notesService", ['$rootScope', '$log', 'CONSTANT
         $rootScope.$emit(CONSTANTS.NOTE_MODIFIED, notes);
     };
 
+    this.trashNotes = function(updatedNotes, archive) {
+        var service = this;
+        _.each(updatedNotes, function(updateNote) {
+            updateNote.trashed = archive;
+            service.saveNote(updateNote, false, false);
+        })
+        $rootScope.$emit(CONSTANTS.NOTE_MODIFIED, notes);
+    };
+
     this.saveNote = function(updatedNote, updateLastModification, emitEvent) {
         var now = new Date().getTime();
         updatedNote.lastModification = !updateLastModification ? updatedNote.lastModification || now : now;
