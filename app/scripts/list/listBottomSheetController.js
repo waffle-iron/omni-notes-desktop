@@ -3,7 +3,7 @@ angular.module('ONApp').controller('listBottomSheetController', ['$rootScope', '
     $scope.bottomSheetItems = [{
         method: 'setCategory',
         params: '',
-        title: 'Set category',
+        title: 'Change category',
         icon: 'label',
         show: true
     }, {

@@ -1,7 +1,10 @@
 <div layout="column">
 
     <md-input-container class="md-icon-float md-input-has-messages">
-        <input type="text" class="md-input" aria-label="Name" placeholder="Name" ng-model="category.name" value="{{category.name}}" md-autofocus>
+        <input type="text" class="md-input" aria-label="Name" placeholder="Name" ng-model="category.name" value="{{category.name}}" md-autofocus required>
+        <div ng-messages="category.name.$error" ng-show="category.name.$dirty">
+            <div ng-message="required">This is required!</div>
+        </div>
     </md-input-container>
 
     <md-input-container class="md-icon-float">

@@ -103,7 +103,11 @@ angular.module("ONApp").service("notesService", ['$rootScope', '$log', 'CONSTANT
     this.setCategory = function(updatedNotes, category) {
         var service = this;
         _.each(updatedNotes, function(updateNote) {
-            updateNote.category = category;
+            if (category) {
+                updateNote.category = category;
+            } else {
+                delete updateNote.category;
+            }
             service.saveNote(updateNote, false, false);
         })
         $rootScope.$emit(CONSTANTS.NOTE_MODIFIED, notes);

@@ -10,4 +10,8 @@ angular.module('ONApp').controller('categoriesSelectionController', ['$rootScope
         $mdDialog.hide();
     }
 
+    $scope.removeCategory = function() {
+        $mdDialog.hide({});
+    }
+
 }]);

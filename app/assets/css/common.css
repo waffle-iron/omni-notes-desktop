@@ -11,10 +11,6 @@ body {
     background: transparent;
 }
 
-md-list {
-    padding 0px !important;
-}
-
 #sidenav {
     height: 100%;
     overflow-y: scroll;

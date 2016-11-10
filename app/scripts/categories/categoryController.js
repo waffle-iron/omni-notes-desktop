@@ -17,8 +17,10 @@ angular.module('ONApp').controller('categoryController', ['$rootScope', '$scope'
     };
 
     $scope.saveCategory = function() {
-        notesService.saveCategory($scope.category);
-        $mdDialog.hide($scope.category);
+        if ($scope.category.name) {
+            notesService.saveCategory($scope.category);
+            $mdDialog.hide($scope.category);
+        }
     }
 
 }]);
