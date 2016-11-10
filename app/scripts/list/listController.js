@@ -121,6 +121,31 @@ angular.module('ONApp').controller('listController', ['$rootScope', '$scope', '$
         notesService.trashNotes($scope.selectedNotes, false);
     }
 
+    $scope.setCategory = function() {
+        $mdDialog.show({
+                controller: 'categoriesSelectionController',
+                templateUrl: 'app/scripts/categories/categoriesSelection.html',
+                clickOutsideToClose: true
+            })
+            .then(function(category) {
+                if (category) {
+                    $log.debug('Set category "' + category.name);
+                    notesService.setCategory($scope.selectedNotes, category);
+                } else {
+                    $mdDialog.show({
+                        templateUrl: 'app/scripts/categories/category.html',
+                        clickOutsideToClose: true,
+                        controller: 'categoryController',
+                        locals: {
+                            category: {}
+                        }
+                    }).then(function(category) {
+                        $scope.setCategory();
+                    });
+                }
+            });
+    }
+
     notesService.loadNotes($scope.notesBackupFolder);
 
 }]);

@@ -1,6 +1,12 @@
 angular.module('ONApp').controller('listBottomSheetController', ['$rootScope', '$scope', '$q', '$log', '$mdBottomSheet', 'navigationService', function($rootScope, $scope, $q, $log, $mdBottomSheet, navigationService) {
 
     $scope.bottomSheetItems = [{
+        method: 'setCategory',
+        params: '',
+        title: 'Set category',
+        icon: 'label',
+        show: true
+    }, {
         method: 'archiveNotes',
         params: '',
         title: 'Archive',

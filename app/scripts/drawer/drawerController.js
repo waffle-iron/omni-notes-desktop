@@ -29,7 +29,7 @@ angular.module('ONApp').controller('drawerController', ['$rootScope', '$scope', 
             return !note.category;
         },
         title: 'Uncategorized',
-        icon: 'folder_open'
+        icon: 'label_outline'
     }];
 
     $scope.menuFooter = [{
