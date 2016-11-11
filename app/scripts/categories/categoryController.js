@@ -23,4 +23,11 @@ angular.module('ONApp').controller('categoryController', ['$rootScope', '$scope'
         }
     }
 
+    $scope.deleteCategory = function() {
+        if ($scope.category.name) {
+            notesService.deleteCategory($scope.category);
+            $mdDialog.hide($scope.category);
+        }
+    }
+
 }]);

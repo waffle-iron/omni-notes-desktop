@@ -107,18 +107,22 @@ angular.module('ONApp').controller('listController', ['$rootScope', '$scope', '$
 
     $scope.archiveNotes = function() {
         notesService.archiveNotes($scope.selectedNotes, true);
+        $scope.selectedNotes = [];
     }
 
     $scope.restoreFromArchiveNotes = function() {
         notesService.archiveNotes($scope.selectedNotes, false);
+        $scope.selectedNotes = [];
     }
 
     $scope.trashNotes = function() {
         notesService.trashNotes($scope.selectedNotes, true);
+        $scope.selectedNotes = [];
     }
 
     $scope.restoreFromTrashNotes = function() {
         notesService.trashNotes($scope.selectedNotes, false);
+        $scope.selectedNotes = [];
     }
 
     $scope.setCategory = function() {
@@ -131,6 +135,7 @@ angular.module('ONApp').controller('listController', ['$rootScope', '$scope', '$
                 if (category) {
                     $log.debug('Set category "' + category.name);
                     notesService.setCategory($scope.selectedNotes, category);
+                    $scope.selectedNotes = [];
                 } else {
                     $mdDialog.show({
                         templateUrl: 'app/scripts/categories/category.html',

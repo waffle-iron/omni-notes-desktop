@@ -100,6 +100,20 @@ angular.module("ONApp").service("notesService", ['$rootScope', '$log', 'CONSTANT
         $rootScope.$emit(CONSTANTS.CATEGORY_MODIFIED, categories);
     }
 
+    this.deleteCategory = function(categoryToDelete) {
+        var service = this;
+        if (categoryToDelete.id) {
+            notes = _.each(notes, function(note) {
+                if (note.category && note.category.id == categoryToDelete.id) {
+                    delete note.category;
+                }
+                service.saveNote(note, false, false);
+            });
+        }
+        categories = _.omit(categories, categoryToDelete.id);
+        $rootScope.$emit(CONSTANTS.CATEGORY_MODIFIED, categories);
+    }
+
     this.setCategory = function(updatedNotes, category) {
         var service = this;
         _.each(updatedNotes, function(updateNote) {
