@@ -5,5 +5,7 @@
         <p>{{note.content}}</p>
     </div>
     <span flex></span>
-    <img ng-src="{{getNoteThumbnail(note)}}" alt="{{getNoteThumbnailShort(note)}}" class="md-avatar" ng-if="note.attachmentsList && note.attachmentsList.length" />
+    <div class="attachment-container">
+        <img ng-src="{{getNoteThumbnail(note)}}" alt="{{getNoteThumbnailShort(note)}}" ng-if="note.attachmentsList && note.attachmentsList.length" />
+    </div>
 </md-item-content>

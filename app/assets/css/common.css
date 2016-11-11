@@ -42,8 +42,22 @@ ng-md-icon {
     background-color: var(--selection-color);
 }
 
-.category-ribbon {
+.note {
+    width: 100%;
+}
+
+.note .category-ribbon {
     width: 15px;
     position: relative;
     left: -15px;
+}
+
+.note .attachment-container {
+    width: 100px;
+}
+
+.note img {
+    display: block;
+    width: 100% !important;
+    height: auto !important;
 }

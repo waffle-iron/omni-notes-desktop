@@ -6,7 +6,7 @@
 
     <md-content>
         <md-list-item ng-repeat="note in notes track by note.creation" ng-click="noteClicked(note)" ng-right-click="noteRightClicked(note)" ng-class="{'selected-note': showAsSelected(note)}" aria-label="Note">
-            <div ng-include="'app/scripts/list/note.html'" />
+            <div ng-include="'app/scripts/list/note.html'" class="note" />
             <md-divider/>
         </md-list-item>
     </md-content>
