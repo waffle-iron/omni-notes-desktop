@@ -1,4 +1,4 @@
-angular.module('ONApp').controller('toolbarController', ['$rootScope', '$scope', '$q', '$log', '$window', 'CONSTANTS', 'notesService', 'hotkeys', function($rootScope, $scope, $q, $log, $window, CONSTANTS, notesService, hotkeys) {
+angular.module('ONApp').controller('toolbarController', ['$rootScope', '$scope', '$q', '$log', '$window', '$mdDialog', 'CONSTANTS', 'notesService', 'hotkeys', function($rootScope, $scope, $q, $log, $window, $mdDialog, CONSTANTS, notesService, hotkeys) {
 
     $scope.showSearch = false;
     $scope.multiSelection = false;
@@ -46,6 +46,14 @@ angular.module('ONApp').controller('toolbarController', ['$rootScope', '$scope',
 
     $scope.confirmMultiSelection = function(confirmed) {
         $rootScope.$emit(CONSTANTS.NOTES_SELECTED_CONFIRM, confirmed);
+    }
+
+    $scope.sort = function() {
+        $mdDialog.show({
+            controller: 'sortController',
+            templateUrl: 'app/scripts/toolbar/sort.html',
+            clickOutsideToClose: true
+        });
     }
 
 }]);

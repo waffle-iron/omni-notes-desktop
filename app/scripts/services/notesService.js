@@ -3,6 +3,8 @@ angular.module("ONApp").service("notesService", ['$rootScope', '$log', 'CONSTANT
     var fs = require('fs');
     var notes = [];
     var categories = {};
+    var sortPredicate = storageService.get('sortPredicate') || 'title';
+    var sortDirection = storageService.get('sortDirection') || 'ASC';
 
     this.loadNotes = function(backupFolderPath) {
         if (backupFolderPath) {
@@ -21,6 +23,7 @@ angular.module("ONApp").service("notesService", ['$rootScope', '$log', 'CONSTANT
                         }
                         if (notes.length == filtered.length) {
                             storageService.put('notes_backup_folder', backupFolderPath);
+                            applyNotesSorting();
                             $rootScope.$emit(CONSTANTS.NOTES_LOADED, notes);
                         }
                     });
@@ -79,6 +82,7 @@ angular.module("ONApp").service("notesService", ['$rootScope', '$log', 'CONSTANT
         } else {
             updatedNote.creation = now;
             notes.push(updatedNote);
+            applyNotesSorting();
         }
         fs.writeFile(storageService.get('notes_backup_folder') + '/' + updatedNote.creation + '.json', JSON.stringify(updatedNote), function(err) {
             if (err) throw err;
@@ -125,6 +129,32 @@ angular.module("ONApp").service("notesService", ['$rootScope', '$log', 'CONSTANT
             service.saveNote(updateNote, false, false);
         })
         $rootScope.$emit(CONSTANTS.NOTE_MODIFIED, notes);
+    };
+
+    this.sortNotes = function(newSortPredicate, newSortDirection) {
+        if (newSortPredicate != sortPredicate || sortDirection != newSortDirection) {
+            sortPredicate = newSortPredicate;
+            storageService.put('sortPredicate', newSortPredicate);
+            sortDirection = newSortDirection;
+            storageService.put('sortDirection', newSortDirection);
+            applyNotesSorting();
+            $rootScope.$emit(CONSTANTS.NOTES_SORTED, notes);
+        }
+    };
+
+    function applyNotesSorting() {
+        notes = _.sortBy(notes, sortPredicate);
+        if ('DESC' == sortDirection) {
+            notes.reverse();
+        }
+    }
+
+    this.getSortPredicate = function() {
+        return sortPredicate;
+    };
+
+    this.getSortDirection = function() {
+        return sortDirection;
     };
 
 

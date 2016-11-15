@@ -27,6 +27,12 @@ angular.module('ONApp').controller('listController', ['$rootScope', '$scope', '$
         $scope.$applyAsync();
     });
 
+    $rootScope.$on(CONSTANTS.NOTES_SORTED, function(event, notes) {
+        $scope.cancelMultiSelection();
+        $scope.notes = notes;
+        $scope.$applyAsync();
+    });
+
     $rootScope.$on(CONSTANTS.NOTES_SELECTED_CONFIRM, function(event, confirmed) {
         if (confirmed) {
             $scope.showGridBottomSheet();

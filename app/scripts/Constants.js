@@ -4,6 +4,7 @@ ONApp.constant('CONSTANTS', {
     NOTE_MODIFIED: 'note_modified',
     NOTES_SELECTED: 'notes_selected',
     NOTES_SELECTED_CONFIRM: 'notes_selected_confirm',
+    NOTES_SORTED: 'notes_sorted',
     CATEGORY_MODIFIED: 'category_modified',
     ATTACHMENTS_SUBFOLDER: 'attachments_subfolder'
 });

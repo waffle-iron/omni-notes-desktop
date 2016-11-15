@@ -5,8 +5,11 @@
         <div class="md-toolbar-tools">
             <span>Omni Notes</span>
             <span flex></span>
-            <md-button aria-label="Search" ng-click="showSearch = !showSearch">
+            <md-button class="md-icon-button" ng-click="showSearch = !showSearch" aria-label="Search">
                 <ng-md-icon icon="search" />
+            </md-button>
+            <md-button class="md-icon-button" ng-click="sort()" aria-label="Sort">
+                <ng-md-icon icon="sort" />
             </md-button>
             <md-menu md-offset="0 -7">
                 <md-button class="md-icon-button" aria-label="More" ng-click="$mdOpenMenu($event)">
