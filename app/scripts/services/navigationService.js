@@ -12,7 +12,7 @@ angular.module("ONApp").service('navigationService', ['storageService', function
     };
 
     this.isCurrentNavigation = function(navigationItem) {
-        return currentNavigationItem && (navigationItem == currentNavigationItem);
+        return currentNavigationItem && (navigationItem === currentNavigationItem);
     };
 
 }]);

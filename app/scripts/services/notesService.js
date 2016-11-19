@@ -77,7 +77,7 @@ angular.module("ONApp").service("notesService", ['$rootScope', '$log', 'CONSTANT
         updatedNote.lastModification = !updateLastModification ? updatedNote.lastModification || now : now;
         if (updatedNote.creation) {
             var i = _.findIndex(notes, function(note) {
-                return note.creation == updatedNote.creation;
+                return note.creation === updatedNote.creation;
             })
             notes[i] = updatedNote;
         } else {
@@ -87,7 +87,7 @@ angular.module("ONApp").service("notesService", ['$rootScope', '$log', 'CONSTANT
         }
         fs.writeFile(storageService.get('notes_backup_folder') + '/' + updatedNote.creation + '.json', JSON.stringify(updatedNote), function(err) {
             if (err) throw err;
-            if (!(false == emitEvent)) {
+            if (!emitEvent) {
                 $rootScope.$emit(CONSTANTS.NOTE_MODIFIED, notes);
             }
         });
@@ -97,7 +97,7 @@ angular.module("ONApp").service("notesService", ['$rootScope', '$log', 'CONSTANT
         updatedCategory.id = updatedCategory.id || new Date().getTime();
         categories[updatedCategory.id] = updatedCategory;
         notes = _.each(notes, function(note) {
-            if (note.category && note.category.id == updatedCategory.id) {
+            if (note.category && note.category.id === updatedCategory.id) {
                 note.category = updatedCategory;
             }
             return note;
@@ -109,7 +109,7 @@ angular.module("ONApp").service("notesService", ['$rootScope', '$log', 'CONSTANT
         var service = this;
         if (categoryToDelete.id) {
             notes = _.each(notes, function(note) {
-                if (note.category && note.category.id == categoryToDelete.id) {
+                if (note.category && note.category.id === categoryToDelete.id) {
                     delete note.category;
                 }
                 service.saveNote(note, false, false);

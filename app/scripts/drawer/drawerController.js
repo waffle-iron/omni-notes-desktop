@@ -72,7 +72,7 @@ angular.module('ONApp').controller('drawerController', ['$rootScope', '$scope', 
 
     $scope.filterCategory = function(category) {
         notesService.filterNotes(function(note) {
-            return note.category && note.category.id == category.id;
+            return note.category && note.category.id === category.id;
         });
         navigationService.setNavigation(category);
     };

@@ -11,25 +11,25 @@ angular.module('ONApp').controller('listBottomSheetController', ['$rootScope', '
         params: '',
         title: 'Archive',
         icon: 'archive',
-        show: navigationService.getNavigation().title == 'Notes'
+        show: navigationService.getNavigation().title === 'Notes'
     }, {
         method: 'restoreFromArchiveNotes',
         params: '',
         title: 'Restore from archive',
         icon: 'unarchive',
-        show: navigationService.getNavigation().title == 'Archive'
+        show: navigationService.getNavigation().title === 'Archive'
     }, {
         method: 'trashNotes',
         params: '',
         title: 'Trash',
         icon: 'delete',
-        show: navigationService.getNavigation().title != 'Trash'
+        show: navigationService.getNavigation().title !== 'Trash'
     }, {
         method: 'restoreFromTrashNotes',
         params: '',
         title: 'Restore from trash',
         icon: 'delete_sweep',
-        show: navigationService.getNavigation().title == 'Trash'
+        show: navigationService.getNavigation().title === 'Trash'
     }];
 
 

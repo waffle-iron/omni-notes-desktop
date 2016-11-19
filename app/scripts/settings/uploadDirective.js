@@ -1,4 +1,4 @@
-ONApp.directive('materialFileInput', ['notesService', function materialFileInput(notesService) {
+ONApp.directive('materialFileInput', ['notesService', function(notesService) {
     var directive = {
         restrict: 'E',
         template: '<input id="fileInput" type="file" class="ng-hide">' +
@@ -7,7 +7,7 @@ ONApp.directive('materialFileInput', ['notesService', function materialFileInput
             ' <input id="textInput" ng-model="fileName" type="text" placeholder="No file chosen" ng-readonly="true"/>' +
             '</md-input-container>',
 
-        link: function(scope, element, attrs) {
+        link: function(scope, element) {
             var input = $(element[0].querySelector('#fileInput'));
             var button = $(element[0].querySelector('#uploadButton'));
             var textInput = $(element[0].querySelector('#textInput'));
