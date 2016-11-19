@@ -8,6 +8,7 @@ angular.module("ONApp").service("notesService", ['$rootScope', '$log', 'CONSTANT
 
     this.loadNotes = function(backupFolderPath) {
         if (backupFolderPath) {
+            storageService.put('notes_backup_folder', backupFolderPath);
             fs.readdir(backupFolderPath, function(err, files) {
                 var filtered = files.filter(function(fileName) {
                     return new RegExp("[0-9]{13}\\.json").test(fileName);
@@ -21,7 +22,7 @@ angular.module("ONApp").service("notesService", ['$rootScope', '$log', 'CONSTANT
                         if (note.category) {
                             categories[note.category.id] = note.category;
                         }
-                        if (notes.length == filtered.length) {
+                        if (notes.length === filtered.length) {
                             storageService.put('notes_backup_folder', backupFolderPath);
                             applyNotesSorting();
                             $rootScope.$emit(CONSTANTS.NOTES_LOADED, notes);

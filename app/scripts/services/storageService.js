@@ -8,4 +8,8 @@ angular.module("ONApp").service("storageService", ['$rootScope', 'localStorageSe
         return localStorageService.get(key);
     };
 
+    this.defaultNotesFolder = function() {
+        return __dirname + '/data';
+    };
+
 }]);
