@@ -1,8 +1,9 @@
 # Omni Notes Desktop
 
-![Notes list](etc/img1.png "Notes' list")
+![](etc/img1.png "Notes' list")
 
-This is the official desktop counterpart of the Android open-source note-taking app [Omni Notes](https://github.com/federicoiosue/Omni-Notes)
+This is the official desktop counterpart of the Android open-source note-taking app [Omni Notes](https://github.com/federicoiosue/Omni-Notes).
+It's built on top [Electron](http://electron.atom.io) and [AngularJS](https://angularjs.org) technologies.
 
 ## Compatibility
 
@@ -10,9 +11,18 @@ The application is cross-platform and runs on Linux, Windows and Mac.
 
 It currently has no backend and just uses JSONs to store and read data. So, **no sync is supported**, if you want to keep data updated through different platforms you have to use third-party synchronization applications.
 
-## Environment
+## Development
 
-```npm install jquery angular angular-route angular-material angular-animate angular-aria angular-material-icons underscore angular-local-storage```
+### Environment
+To download all the needed dependencies for the application to run, listed into the _package.json_ file use the command: ```npm install angular```
+
+### Build
+[Electron Packager](https://github.com/electron-userland/electron-packager) is needed to build the project into executable binary.
+```
+sudo npm install electron-packager -g
+```
+
+After that simply run ```electron-packager .``` command from inside the project app to build for your platform.
 
 ## Developed with love and passion by
 * Federico Iosue - [Website](http://www.iosue.it/federico)
