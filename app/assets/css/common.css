@@ -11,6 +11,25 @@ body {
     background: transparent;
 }
 
+
+/*Workaround for nested dmDialog instances*/
+
+.md-dialog-backdrop:nth-of-type(even) {
+    z-index: 81;
+}
+
+.md-dialog-backdrop:nth-of-type(odd) {
+    z-index: 79;
+}
+
+.md-dialog-container:nth-of-type(even) {
+    z-index: 82;
+}
+
+.md-dialog-container:nth-of-type(odd) {
+    z-index: 80;
+}
+
 #sidenav {
     height: 100%;
     overflow-y: scroll;
@@ -60,4 +79,14 @@ ng-md-icon {
     display: block;
     width: 100% !important;
     height: auto !important;
+}
+
+.detail-attachments md-grid-tile {
+    transition: all 500ms ease-out 100ms;
+    overflow: hidden;
+    img {
+        width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
 }

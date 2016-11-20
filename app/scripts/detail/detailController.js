@@ -1,7 +1,7 @@
 angular.module('ONApp').controller('detailController', ['$rootScope', '$scope', '$q', '$log', 'CONSTANTS', 'notesService', 'storageService', 'note', '$mdDialog', 'hotkeys', 'Upload', function($rootScope, $scope, $q, $log, CONSTANTS, notesService, storageService, note, $mdDialog, hotkeys, Upload) {
 
     $scope.note = _.clone(note);
-    $scope.attachmentsRoot = storageService.get('notes_backup_folder') + '/files/';
+    $scope.attachmentsRoot = storageService.getAttachmentsFolder();
 
     // Keyboard shortcuts
     hotkeys.add({
@@ -31,6 +31,35 @@ angular.module('ONApp').controller('detailController', ['$rootScope', '$scope', 
                 $scope.note.attachmentsList.push(attachment);
             });
         }
+    }
+
+    $scope.openAttachment = function(attachment) {
+
+
+    }
+
+    $scope.deleteAttachment = function(attachmentToDelete) {
+        $mdDialog.show({
+            controllerAs: 'dialogCtrl',
+            controller: function($mdDialog) {
+                this.confirm = function() {
+                    $mdDialog.hide();
+                }
+                this.cancel = function() {
+                    $mdDialog.cancel();
+                }
+            },
+            preserveScope: true,
+            autoWrap: true,
+            skipHide: true,
+            templateUrl: 'app/scripts/detail/attachmentDeletionDialog.html'
+        }).then(function() {
+            $scope.note.attachmentsListOld = $scope.note.attachmentsListOld || [];
+            $scope.note.attachmentsListOld.push(attachmentToDelete);
+            $scope.note.attachmentsList = _.reject($scope.note.attachmentsList, function(attachment) {
+                return attachment.id === attachmentToDelete.id;
+            });
+        });
     }
 
 }]);

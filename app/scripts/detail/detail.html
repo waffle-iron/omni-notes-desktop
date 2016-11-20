@@ -12,9 +12,9 @@
         <ng-md-icon icon="attachment" />
     </md-button>
 
-    <div>
+    <div class="detail-attachments">
         <md-grid-list md-cols-sm="2" md-cols-md="4" md-cols-lg="8" md-cols-gt-lg="12" md-row-height="4:3">
-            <md-grid-tile ng-repeat="attachment in note.attachmentsList">
+            <md-grid-tile ng-repeat="attachment in note.attachmentsList" ng-click="openAttachment(attachment)" ng-right-click="deleteAttachment(attachment)" md-ink-ripple class="md-clickable">
                 <img ng-src="{{getNoteThumbnail(attachment)}}" alt="{{getNoteThumbnail(attachment)}}" />
             </md-grid-tile>
         </md-grid-list>

@@ -85,20 +85,37 @@ angular.module("ONApp").service("notesService", ['$rootScope', '$log', 'CONSTANT
             notes.push(updatedNote);
             applyNotesSorting();
         }
-        fs.writeFile(storageService.get('notes_backup_folder') + '/' + updatedNote.creation + '.json', JSON.stringify(updatedNote), function(err) {
+        fs.writeFile(storageService.get('notes_backup_folder') + '/' + updatedNote.creation + '.json', JSON.stringify(updatedNote, replacer), function(err) {
             if (err) throw err;
             if (!emitEvent) {
                 $rootScope.$emit(CONSTANTS.NOTE_MODIFIED, notes);
             }
         });
+        cleanRemovedAttachments(updatedNote);
     };
+
+    function cleanRemovedAttachments(note) {
+        var attachmentsFolder = storageService.getAttachmentsFolder();
+        _.each(note.attachmentsListOld, function(attachment) {
+            fs.remove(attachmentsFolder + _.last(attachment.uriPath.split('/')), function(err) {
+                if (err) $log.error(err);
+            })
+        });
+    }
+
+    function replacer(key, value) {
+        if (key == "attachmentsListOld") return undefined;
+        else return value;
+    }
+
 
     this.saveCategory = function(updatedCategory) {
         updatedCategory.id = updatedCategory.id || new Date().getTime();
         categories[updatedCategory.id] = updatedCategory;
         notes = _.each(notes, function(note) {
             if (note.category && note.category.id === updatedCategory.id) {
-                note.category = updatedCategory;
+                note.category = updatedCatego
+                    // fs.createReadStream(file.path).pipe(fs.createWriteStream(attachment.uriPath));ry;
             }
             return note;
         });
@@ -142,7 +159,6 @@ angular.module("ONApp").service("notesService", ['$rootScope', '$log', 'CONSTANT
             this.size = file.size;
         };
         var attachment = new Attachment(file);
-        // fs.createReadStream(file.path).pipe(fs.createWriteStream(attachment.uriPath));
         fs.copySync(file.path, attachment.uriPath)
         return attachment;
     }

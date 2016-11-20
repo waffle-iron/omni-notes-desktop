@@ -12,4 +12,8 @@ angular.module("ONApp").service("storageService", ['$rootScope', 'localStorageSe
         return __dirname + '/data';
     };
 
+    this.getAttachmentsFolder = function() {
+        return this.get('notes_backup_folder') + '/files/';
+    };
+
 }]);
