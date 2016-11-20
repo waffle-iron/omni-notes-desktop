@@ -12,7 +12,8 @@ var ONApp;
             'ngMdIcons',
             'colorpicker.module',
             'LocalStorageModule',
-            'cfp.hotkeys'
+            'cfp.hotkeys',
+            'ngFileUpload'
         ])
         .config(['$routeProvider', function($routeProvider) {
             $routeProvider

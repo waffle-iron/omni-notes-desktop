@@ -1,6 +1,6 @@
 angular.module("ONApp").service("notesService", ['$rootScope', '$log', 'CONSTANTS', 'storageService', function($rootScope, $log, CONSTANTS, storageService) {
 
-    var fs = require('fs');
+    var fs = require('fs-extra');
     var notes = [];
     var categories = {};
     var sortPredicate = storageService.get('sortPredicate') || 'title';
@@ -130,7 +130,22 @@ angular.module("ONApp").service("notesService", ['$rootScope', '$log', 'CONSTANT
             service.saveNote(updateNote, false, false);
         })
         $rootScope.$emit(CONSTANTS.NOTE_MODIFIED, notes);
-    };
+    }
+
+    this.createNewAttachment = function(file, attachmentsRoot) {
+        var Attachment = function(file) {
+            this.id = new Date().getTime();
+            this.name = file.name;
+            var ext = _.last(file.name.split('.'));
+            this.uriPath = attachmentsRoot + this.id + (ext ? '.' + ext : '');
+            this.mime_type = file.type;
+            this.size = file.size;
+        };
+        var attachment = new Attachment(file);
+        // fs.createReadStream(file.path).pipe(fs.createWriteStream(attachment.uriPath));
+        fs.copySync(file.path, attachment.uriPath)
+        return attachment;
+    }
 
     this.sortNotes = function(newSortPredicate, newSortDirection) {
         if (newSortPredicate != sortPredicate || sortDirection != newSortDirection) {

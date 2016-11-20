@@ -8,6 +8,18 @@
         <textarea class="md-input" aria-label="Content" placeholder="Content" ng-model="note.content">{{note.content}}</textarea>
     </md-input-container>
 
+    <md-button class="md-icon-button" ngf-select="upload($files)" ngf-multiple="true" aria-label="Add attachments">
+        <ng-md-icon icon="attachment" />
+    </md-button>
+
+    <div>
+        <md-grid-list md-cols-sm="2" md-cols-md="4" md-cols-lg="8" md-cols-gt-lg="12" md-row-height="4:3">
+            <md-grid-tile ng-repeat="attachment in note.attachmentsList">
+                <img ng-src="{{getNoteThumbnail(attachment)}}" alt="{{getNoteThumbnail(attachment)}}" />
+            </md-grid-tile>
+        </md-grid-list>
+    </div>
+
     <md-button class="md-primary" style="margin-right:20px;" ng-click="saveNote()">Save</md-button>
 
 </div>
